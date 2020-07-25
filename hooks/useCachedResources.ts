@@ -1,7 +1,7 @@
-import { Ionicons } from '@expo/vector-icons';
-import * as Font from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
-import * as React from 'react';
+import { Ionicons } from "@expo/vector-icons";
+import * as Font from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import * as React from "react";
 
 export default function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
@@ -14,8 +14,9 @@ export default function useCachedResources() {
 
         // Load fonts
         await Font.loadAsync({
-          ...Ionicons.font,
-          'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf'),
+          "segoe-ui": require("../assets/fonts/Segoe-UI.ttf"),
+          "segoe-ui-bold": require("../assets/fonts/SegoeUIBold.ttf"),
+          "segoe-ui-semi": require("../assets/fonts/seguisb.ttf"),
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service
