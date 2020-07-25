@@ -6,6 +6,8 @@ import { ProductServices } from "../services/productService";
 import { Theme } from "../constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView } from "react-native-gesture-handler";
+import Header from "../components/Header";
+
 interface Props {}
 
 function ProductDetailsScreen() {
@@ -30,21 +32,20 @@ function ProductDetailsScreen() {
   return (
     // <ScrollView style={{ height: "100%" }}>
     <View style={styles.container}>
-      {/* <Image
-      style={styles.image}
-      source={require("../assets/images/details-background-shape.png")}
-    /> */}
-      <Text
-        style={{
-          fontSize: 30,
-          fontFamily: "segoe-ui-bold",
-          color: Theme.colors.dark.background,
-        }}
-      >
-        {product.name}
-      </Text>
-      <Block title="Codigo de barra" description={product.sku}></Block>
-      <Block title="Descripcion" description={product.description} />
+      <Header />
+      <View>
+        <Text
+          style={{
+            fontSize: 30,
+            fontFamily: "segoe-ui-bold",
+            color: Theme.colors.dark.background,
+          }}
+        >
+          {product.name}
+        </Text>
+        <Block title="Codigo de barra" description={product.sku}></Block>
+        <Block title="Descripcion" description={product.description} />
+      </View>
     </View>
     // </ScrollView>
   );
