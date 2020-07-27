@@ -32,13 +32,16 @@ function ProductDetailsScreen() {
   return (
     // <ScrollView style={{ height: "100%" }}>
     <View style={styles.container}>
-      <Header />
+      <View style={{ marginBottom: -175 }}>
+        <Header />
+      </View>
       <View>
         <Text
           style={{
             fontSize: 30,
             fontFamily: "segoe-ui-bold",
             color: Theme.colors.dark.background,
+            textAlign: "center",
           }}
         >
           {product.name}
