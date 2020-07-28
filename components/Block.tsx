@@ -5,7 +5,7 @@ import { TextInput } from "react-native-gesture-handler";
 
 interface Props {
   title: string;
-  description: string | undefined;
+  description: string | number | undefined;
   isEditable?: boolean;
 }
 

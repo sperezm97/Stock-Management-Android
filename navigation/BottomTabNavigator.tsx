@@ -135,14 +135,6 @@ function ProductsListNavigator() {
         component={ProductDetailsScreen}
         options={{
           headerShown: false,
-
-          //   headerTitle: "Details",
-          //   headerTitleStyle: {
-          //     fontSize: Theme.fonts.h1.fontSize,
-          //     color: Theme.colors.gray,
-          //     fontFamily: "segoe-ui-bold",
-          //   },
-          //   headerTitleAlign: "center",
         }}
         initialParams={{ sku: "" }}
       />

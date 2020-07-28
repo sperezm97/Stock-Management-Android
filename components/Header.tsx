@@ -1,8 +1,13 @@
 import React from "react";
-import { View, Text, ImageBackground, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  ImageBackground,
+  StyleSheet,
+  Dimensions,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { ProductsScreenNavigationProp } from "../types";
-import PhotoContainer from "./PhotoContainer";
 import { Theme } from "../constants";
 import { MaterialIcons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -24,7 +29,7 @@ const Header = () => {
           position: "absolute",
           flexDirection: "row",
           justifyContent: "space-around",
-          display: "flex",
+          flex: 1,
         }}
       >
         <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -42,16 +47,13 @@ const Header = () => {
             color: Theme.colors.light.background,
           }}
         >
-          Header
+          Detalles
         </Text>
         <MaterialIcons
           size={28}
           color={Theme.colors.light.background}
           name="edit"
         />
-      </View>
-      <View style={styles.photoContainer}>
-        <PhotoContainer />
       </View>
     </View>
   );
@@ -63,17 +65,10 @@ const styles = StyleSheet.create({
   image: {
     height: "100%",
     width: "100%",
-    transform: [{ translateX: 10 }, { translateY: -90 }],
-  },
-  photoContainer: {
-    position: "absolute",
-    width: "100%",
-    display: "flex",
-    alignItems: "center",
-    top: "18%",
+    transform: [{ translateY: -90 }],
   },
   container: {
     height: 500,
-    width: 500,
+    width: Dimensions.get("window").width,
   },
 });

@@ -1,7 +1,9 @@
 import { Category } from "../state/types/category.type";
 import axios from "axios";
 
-const url = "https://localhost:44397/api/categories";
+// const url = "https://localhost:44397/api/categories";
+const url = "https://stockmanagement2018.azurewebsites.net/api/categories";
+
 const headers = {
   headers: {
     "content-type": "application/json",
@@ -16,7 +18,7 @@ const getCategories = async () => {
 const getCategory = async (id: number) => {
   let categoryUrl = `${url}/${id}`;
   const category = await axios.get<Category>(categoryUrl, headers);
-  return category;
+  return category.data;
 };
 
 const addCategory = async (category: Category, photo: File) => {
