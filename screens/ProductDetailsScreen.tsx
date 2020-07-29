@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  ImageBackground,
-  Image,
-  ScrollView,
-  Dimensions,
-} from "react-native";
+import { View, Text, StyleSheet, ScrollView, Dimensions } from "react-native";
 import { Block } from "../components";
 import { Product } from "../state/types/product.type";
 import { ProductServices } from "../services/productService";
@@ -66,20 +58,15 @@ function ProductDetailsScreen() {
               <PhotoContainer />
             </View>
             <View style={styles.content}>
-              <Text
-                style={{
-                  fontSize: 30,
-                  fontFamily: "segoe-ui-bold",
-                  color: Theme.colors.dark.background,
-                  textAlign: "center",
-                }}
-              >
-                {product.name}
-              </Text>
+              <Text style={styles.title}>{product.name}</Text>
               <Block title="Codigo de barra" description={product.sku} />
               <Block title="Descripcion" description={product.description} />
               <Block title="Unidades" description={product.units} />
               <Block title="Categoria" description={category.name} />
+              <Block
+                title="Alerta de cantidad"
+                description={product.alertQuantity}
+              />
             </View>
             {/* <View style={{ paddingVertical: 190, backgroundColor: "black" }} /> */}
           </View>
@@ -96,11 +83,9 @@ export default ProductDetailsScreen;
 const styles = StyleSheet.create({
   container: {
     height: "auto",
-    flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    width: "auto",
-    top: "10%",
+    top: 90,
   },
   detailsWraper: {
     backgroundColor: Theme.colors.white,
@@ -111,11 +96,16 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    justifyContent: "center",
     top: "5%",
+    paddingBottom: "50%",
   },
   header: {
     position: "absolute",
-    flex: 1,
+  },
+  title: {
+    fontSize: 30,
+    fontFamily: "segoe-ui-bold",
+    color: Theme.colors.dark.background,
+    textAlign: "center",
   },
 });
