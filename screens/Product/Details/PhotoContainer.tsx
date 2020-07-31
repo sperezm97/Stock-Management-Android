@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, ImageBackground, Image } from 'react-native';
-import { Theme } from '../constants';
+import { Theme, images } from '../../../constants';
 
 interface Props {
   uri?: string | undefined;
@@ -14,17 +14,14 @@ function PhotoContainer({ uri }: Props) {
       return (
         <Image
           style={{ width: 80, height: 80, resizeMode: 'contain' }}
-          source={require('../assets/images/no-image.png')}
+          source={images.noImage}
         />
       );
     }
   }
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={require('../assets/images/circle-shape.png')}
-        style={styles.imageContainer}
-      />
+      <ImageBackground source={images.noImage} style={styles.imageContainer} />
       <View style={styles.circle}>{imageHandler()}</View>
     </View>
   );
