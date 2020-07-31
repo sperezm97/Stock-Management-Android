@@ -1,7 +1,7 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { Theme } from "../constants";
-import { TextInput } from "react-native-gesture-handler";
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { Theme } from '../constants';
+import { TextInput } from 'react-native-gesture-handler';
 
 interface Props {
   title: string;
@@ -13,7 +13,10 @@ const Block = ({ title, description, isEditable = false }: Props) => {
   return (
     <View>
       <Text style={styles.title}>{title}</Text>
-      <TextInput editable={isEditable} style={styles.description}>
+      <TextInput
+        multiline={true}
+        editable={isEditable}
+        style={styles.description}>
         {description}
       </TextInput>
       <View style={styles.line} />
@@ -32,8 +35,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: Theme.fonts.body.fontSize,
-    fontFamily: "segoe-ui-semi",
-    color: "#111111",
+    fontFamily: 'segoe-ui-semi',
+    color: '#111111',
     opacity: 0.7,
     marginTop: 10,
   },
@@ -41,5 +44,6 @@ const styles = StyleSheet.create({
     fontSize: Theme.fonts.caption.fontSize,
     color: Theme.colors.gray,
     marginTop: 0,
+    // textAlign: 'left',
   },
 });

@@ -1,24 +1,26 @@
-import { MaterialIcons } from "@expo/vector-icons";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { MaterialIcons } from '@expo/vector-icons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   createStackNavigator,
   StackNavigationOptions,
-} from "@react-navigation/stack";
-import * as React from "react";
+} from '@react-navigation/stack';
+import * as React from 'react';
 
-import { Theme } from "../constants/";
-import useColorScheme from "../hooks/useColorScheme";
-import TabOneScreen from "../screens/TabOneScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
+import { Theme } from '../constants/';
+import useColorScheme from '../hooks/useColorScheme';
+import TabOneScreen from '../screens/TabOneScreen';
+import TabTwoScreen from '../screens/TabTwoScreen';
 import {
   BottomTabParamList,
   TabOneParamList,
   TabTwoParamList,
   ProductsParamList,
-} from "../types";
-import ProductDetailsScreen from "../screens/ProductDetailsScreen";
-import ProductsListScreen from "../screens/ProductsListScreen";
-import { productActions } from "../state/domain/actions/product.action";
+  CategoriesParamList,
+} from '../types';
+import ProductDetailsScreen from '../screens/Product/Details';
+import ProductsListScreen from '../screens/ProductsListScreen';
+import { productActions } from '../state/domain/actions/product.action';
+import CategoriesScreen from '../screens/CategoriesScreen';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -39,8 +41,7 @@ export default function BottomTabNavigator() {
           padding: 5,
           height: 60,
         },
-      }}
-    >
+      }}>
       <BottomTab.Screen
         name="Products"
         component={ProductsListNavigator}
@@ -64,6 +65,7 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
         }}
       />
+      <BottomTab.Screen name="Categories" component={CategoriesNavigator} />
     </BottomTab.Navigator>
   );
 }
@@ -85,13 +87,13 @@ function TabOneNavigator() {
         name="TabOneScreen"
         component={TabOneScreen}
         options={{
-          headerTitle: "Details",
+          headerTitle: 'Details',
           headerTitleStyle: {
             fontSize: Theme.fonts.h1.fontSize,
             color: Theme.colors.gray,
-            fontFamily: "segoe-ui-bold",
+            fontFamily: 'segoe-ui-bold',
           },
-          headerTitleAlign: "center",
+          headerTitleAlign: 'center',
         }}
       />
     </TabOneStack.Navigator>
@@ -106,7 +108,7 @@ function TabTwoNavigator() {
       <TabTwoStack.Screen
         name="TabTwoScreen"
         component={TabTwoScreen}
-        options={{ headerTitle: "Tab Two Title" }}
+        options={{ headerTitle: 'Tab Two Title' }}
       />
     </TabTwoStack.Navigator>
   );
@@ -121,32 +123,35 @@ function ProductsListNavigator() {
         name="ProductsListScreen"
         component={ProductsListScreen}
         options={{
-          headerTitle: "Products",
+          headerTitle: 'Products',
           headerTitleStyle: {
             fontSize: Theme.fonts.h1.fontSize,
             color: Theme.colors.gray,
-            fontFamily: "segoe-ui-bold",
+            fontFamily: 'segoe-ui-bold',
           },
-          headerTitleAlign: "center",
+          headerTitleAlign: 'center',
         }}
       />
       <ProductsListStack.Screen
         name="ProductDetailsScreen"
         component={ProductDetailsScreen}
         options={{
-          // header: ({navigation}) => {return},
-          headerTitle: "Details",
-          headerTitleStyle: {
-            fontSize: Theme.fonts.h1.fontSize,
-            color: Theme.colors.gray,
-            fontFamily: "segoe-ui-bold",
-          },
-          headerTitleAlign: "center",
+          headerShown: false,
         }}
-        initialParams={{ sku: "" }}
+        initialParams={{ sku: '' }}
       />
     </ProductsListStack.Navigator>
   );
 }
 
-const stackNavigatorProps: StackNavigationOptions = {};
+const CategoriesStack = createStackNavigator<CategoriesParamList>();
+function CategoriesNavigator() {
+  return (
+    <CategoriesStack.Navigator>
+      <CategoriesStack.Screen
+        name="CategoriesScreen"
+        component={CategoriesScreen}
+      />
+    </CategoriesStack.Navigator>
+  );
+}

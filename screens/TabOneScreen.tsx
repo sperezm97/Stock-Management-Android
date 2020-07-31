@@ -1,11 +1,11 @@
-import * as React from "react";
-import { StyleSheet } from "react-native";
+import * as React from 'react';
+import { StyleSheet } from 'react-native';
 
-import EditScreenInfo from "../components/EditScreenInfo";
-import { Text, View } from "../components/Themed";
-import { useEffect, useState } from "react";
-import { Product } from "../state/types/product.type";
-import { ProductServices } from "../services/productService";
+import EditScreenInfo from '../components/EditScreenInfo';
+import { Text, View } from '../components/Themed';
+import { useEffect, useState } from 'react';
+import { Product } from '../state/types/product.type';
+import { ProductServices } from '../services/productService';
 
 export default function TabOneScreen() {
   const [products, setproduct] = useState<Product[] | undefined>([]);
@@ -14,8 +14,6 @@ export default function TabOneScreen() {
     const fetchDataAsync = async () => {
       const product = await ProductServices.getProducts();
       setproduct(product);
-      console.log(products);
-      console.log(product);
     };
     fetchDataAsync();
   }, []);
@@ -36,16 +34,16 @@ export default function TabOneScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   title: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   separator: {
     marginVertical: 30,
     height: 1,
-    width: "80%",
+    width: '80%',
   },
 });

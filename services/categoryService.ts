@@ -1,11 +1,13 @@
-import { Category } from "../state/types/category.type";
-import axios from "axios";
+import { Category } from '../state/types/category.type';
+import axios from 'axios';
 
-const url = "https://localhost:44397/api/categories";
+// const url = "https://localhost:44397/api/categories";
+const url = 'https://stockmanagement2018.azurewebsites.net/api/categories';
+
 const headers = {
   headers: {
-    "content-type": "application/json",
-    Accept: "application/json",
+    'content-type': 'application/json',
+    Accept: 'application/json',
   },
 };
 const getCategories = async () => {
@@ -13,10 +15,9 @@ const getCategories = async () => {
   return categories.data;
 };
 
-const getCategory = async (id: number) => {
+const getCategory = (id: number) => {
   let categoryUrl = `${url}/${id}`;
-  const category = await axios.get<Category>(categoryUrl, headers);
-  return category;
+  return axios.get<Category>(categoryUrl, headers);
 };
 
 const addCategory = async (category: Category, photo: File) => {

@@ -1,27 +1,19 @@
-import { Product } from "../state/types/product.type";
-import axios from "axios";
+import { Product } from '../state/types/product.type';
+import axios from 'axios';
 
 // const url = "https://localhost:5001/api/products";
-const url = "https://stockmanagement2018.azurewebsites.net/api/products";
+const url = 'https://stockmanagement2018.azurewebsites.net/api/products';
 const headers = {
   headers: {
-    "content-type": "application/json",
-    Accept: "application/json",
+    'content-type': 'application/json',
+    Accept: 'application/json',
   },
 };
-const getProducts = async () => {
-  try {
-    const products = await axios.get<Product[]>(url);
-    return products.data;
-  } catch (e) {
-    console.log(e);
-  }
-};
+const getProducts = () => axios.get<Product[]>(url);
 
-const getProduct = async (sku: string) => {
+const getProduct = (sku: string) => {
   let productUrl = `${url}/${sku}`;
-  const product = await await axios.get<Product>(productUrl, headers);
-  return product.data;
+  return axios.get<Product>(productUrl, headers);
 };
 
 const getProductsByCategory = async (categoryId: number) => {

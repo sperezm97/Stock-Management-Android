@@ -1,52 +1,104 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, ImageBackground, Image } from "react-native";
-import { Block } from "../components";
-import { Product } from "../state/types/product.type";
-import { ProductServices } from "../services/productService";
-import { Theme } from "../constants";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { ScrollView } from "react-native-gesture-handler";
+import React, { useState, useEffect } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Dimensions,
+  ImageBackground,
+} from 'react-native';
+import { Block } from '../components';
+import { Product } from '../state/types/product.type';
+import { ProductServices } from '../services/productService';
+import { Theme } from '../constants';
+import Header from '../components/Header';
+import PhotoContainer from '../components/PhotoContainer';
+import { CategoryServices } from '../services/categoryService';
+import { Category } from '../state/types/category.type';
+import WithLoading from '../hooks/hoc/WithLoader';
+import ProductCard from '../components/ProductCard';
+
 interface Props {}
 
+const screenWidth = Dimensions.get('window').width;
 function ProductDetailsScreen() {
   const [product, setproduct] = useState<Product>({
-    sku: "",
+    sku: '',
     categoryId: 0,
-    name: "",
-    description: "",
-    photoUrl: "",
+    name: '',
+    description: '',
+    photoUrl: '',
     alertQuantity: 0,
     sellingPrice: 0,
     marginProfitability: 0,
     units: 0,
   });
+  const [category, setcategory] = useState<Category>({
+    id: 0,
+    name: '',
+    description: '',
+  });
+
+  const [editing, setediting] = useState(false);
+  const handleEditing = () => {
+    setediting(!editing);
+  };
+  const fetchCategory = async () => {
+    const newCategory = await CategoryServices.getCategory(product.categoryId);
+    setcategory(newCategory);
+  };
+  const fetchProduct = async () => {
+    const newProduct = await ProductServices.getProduct('IS000002');
+    setproduct(newProduct);
+  };
+  const [loading, setloading] = useState<Boolean>(false);
   useEffect(() => {
-    const fetchProduct = async () => {
-      const newProduct = await ProductServices.getProduct("IS000001");
-      setproduct(newProduct);
-    };
+    setloading(true);
     fetchProduct();
+    setloading(false);
   }, []);
+  useEffect(() => {
+    fetchCategory();
+  });
   return (
-    // <ScrollView style={{ height: "100%" }}>
-    <View style={styles.container}>
-      {/* <Image
-      style={styles.image}
-      source={require("../assets/images/details-background-shape.png")}
-    /> */}
-      <Text
-        style={{
-          fontSize: 30,
-          fontFamily: "segoe-ui-bold",
-          color: Theme.colors.dark.background,
-        }}
-      >
-        {product.name}
-      </Text>
-      <Block title="Codigo de barra" description={product.sku}></Block>
-      <Block title="Descripcion" description={product.description} />
+    <View style={styles.detailsWraper}>
+      <View style={styles.header}>
+        <Header handleEditing={handleEditing} />
+      </View>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ flex: 1 }}>
+        {(loading && (
+          <View>
+            <Text>loading...</Text>
+          </View>
+        )) || (
+          <View style={styles.container}>
+            <ImageBackground
+              source={require('../assets/images/header-shape.png')}
+              style={styles.image}
+            />
+            <View style={{ top: '15%', alignItems: 'center' }}>
+              <View style={styles.photoContainer}>
+                <PhotoContainer />
+              </View>
+              <ProductCard
+                product={product}
+                category={category}
+                isEditable={editing}
+              />
+              {/* {
+                <View
+                  style={{ paddingVertical: 190, backgroundColor: 'black' }}
+                />
+              } */}
+            </View>
+          </View>
+        )}
+      </ScrollView>
     </View>
-    // </ScrollView>
+
+    //{" "}
   );
 }
 
@@ -54,18 +106,22 @@ export default ProductDetailsScreen;
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: 'center',
+  },
+  detailsWraper: {
     backgroundColor: Theme.colors.white,
-    height: "100%",
     flex: 1,
-    flexDirection: "column",
-    alignItems: "center",
+    width: screenWidth,
+  },
+  photoContainer: { zIndex: 0 },
+  header: {
+    zIndex: 1,
   },
   image: {
-    width: "100%",
-    height: "100%",
-    flex: 1,
-    justifyContent: "center",
-    resizeMode: "cover",
-    position: "absolute",
+    height: 500,
+    width: '100%',
+    transform: [{ translateY: -90 }],
+    position: 'absolute',
+    zIndex: 0,
   },
 });
