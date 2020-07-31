@@ -20,7 +20,7 @@ const getProducts = async () => {
 
 const getProduct = async (sku: string) => {
   let productUrl = `${url}/${sku}`;
-  const product = await await axios.get<Product>(productUrl, headers);
+  const product = await axios.get<Product>(productUrl, headers);
   return product.data;
 };
 

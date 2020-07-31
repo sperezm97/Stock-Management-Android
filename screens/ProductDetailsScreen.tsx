@@ -7,7 +7,6 @@ import {
   Dimensions,
   ImageBackground,
 } from 'react-native';
-import { Block } from '../components';
 import { Product } from '../state/types/product.type';
 import { ProductServices } from '../services/productService';
 import { Theme } from '../constants';
@@ -15,14 +14,11 @@ import Header from '../components/Header';
 import PhotoContainer from '../components/PhotoContainer';
 import { CategoryServices } from '../services/categoryService';
 import { Category } from '../state/types/category.type';
-import WithLoading from '../hooks/hoc/WithLoader';
 import ProductCard from '../components/ProductCard';
-
-interface Props {}
 
 const screenWidth = Dimensions.get('window').width;
 function ProductDetailsScreen() {
-  const [product, setproduct] = useState<Product>({
+  const [product, setProduct] = useState<Product>({
     sku: '',
     categoryId: 0,
     name: '',
@@ -33,35 +29,35 @@ function ProductDetailsScreen() {
     marginProfitability: 0,
     units: 0,
   });
-  const [category, setcategory] = useState<Category>({
+  const [category, setCategory] = useState<Category>({
     id: 0,
     name: '',
     description: '',
   });
 
-  const [editing, setediting] = useState(false);
+  const [editing, setEditing] = useState(false);
   const handleEditing = () => {
-    setediting(!editing);
+    setEditing(!editing);
   };
   const fetchCategory = async () => {
     const newCategory = await CategoryServices.getCategory(product.categoryId);
-    setcategory(newCategory);
+    setCategory(newCategory);
   };
   const fetchProduct = async () => {
     const newProduct = await ProductServices.getProduct('IS000002');
-    setproduct(newProduct);
+    setProduct(newProduct);
   };
-  const [loading, setloading] = useState<Boolean>(false);
+  const [loading, setLoading] = useState<Boolean>(false);
   useEffect(() => {
-    setloading(true);
+    setLoading(true);
     fetchProduct();
-    setloading(false);
+    setLoading(false);
   }, []);
   useEffect(() => {
     fetchCategory();
   });
   return (
-    <View style={styles.detailsWraper}>
+    <View style={styles.detailsWrapper}>
       <View style={styles.header}>
         <Header handleEditing={handleEditing} />
       </View>
@@ -108,7 +104,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
   },
-  detailsWraper: {
+  detailsWrapper: {
     backgroundColor: Theme.colors.white,
     flex: 1,
     width: screenWidth,
