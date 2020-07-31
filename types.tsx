@@ -1,6 +1,6 @@
-import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
-import { RouteProp, CompositeNavigationProp } from "@react-navigation/native";
-import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { RouteProp, CompositeNavigationProp } from '@react-navigation/native';
+import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
 
 export type RootStackParamList = {
   Root: undefined;
@@ -11,6 +11,7 @@ export type BottomTabParamList = {
   TabOne: undefined;
   TabTwo: undefined;
   Products: undefined;
+  Categories: undefined;
 };
 
 export type ProductsParamList = {
@@ -26,6 +27,9 @@ export type TabOneParamList = {
 export type TabTwoParamList = {
   TabTwoScreen: undefined;
 };
+export type CategoriesParamList = {
+  CategoriesScreen: undefined;
+};
 
 // Type Checking param List
 
@@ -39,7 +43,7 @@ export type AppStackParamList = {
   };
   PlaceOrder: undefined;
   StatusOrder: {
-    action: "success" | "failure";
+    action: 'success' | 'failure';
   };
   Order: undefined;
   AddressList: undefined;
@@ -53,33 +57,33 @@ export type AppStackParamList = {
 // Stack
 type ProductsScreenStackProp = StackScreenProps<
   ProductsParamList,
-  "ProductsListScreen"
+  'ProductsListScreen'
 >;
 type ProductDetailsScreenStackProp = StackScreenProps<
   ProductsParamList,
-  "ProductDetailsScreen"
+  'ProductDetailsScreen'
 >;
 
 // Route
 type ProductsScreenRouteProp = RouteProp<
   ProductsParamList,
-  "ProductsListScreen"
+  'ProductsListScreen'
 >;
 type ProductDetailsScreenRouteProp = RouteProp<
   ProductsParamList,
-  "ProductDetailsScreen"
+  'ProductDetailsScreen'
 >;
 
-type RootScreenRouteProp = RouteProp<RootStackParamList, "Root">;
+type RootScreenRouteProp = RouteProp<RootStackParamList, 'Root'>;
 
 // Bottom tab navigation props
 type ProductsBottomTabNavigationProp = BottomTabNavigationProp<
   ProductsParamList,
-  "ProductsListScreen"
+  'ProductsListScreen'
 >;
 type RootBottomTabNavigationProp = BottomTabNavigationProp<
   RootStackParamList,
-  "Root"
+  'Root'
 >;
 
 // screens

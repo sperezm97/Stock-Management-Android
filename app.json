@@ -26,5 +26,16 @@
     },
     "description": "",
     "githubUrl": "https://github.com/juancarlosf2/Stock-Management-Android/tree/remote"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "./src/*.{js,jsx,ts,tsx}": [
+      "npx prettier --write",
+      "eslint src/*.js --fix-dry-run"
+    ]
   }
 }

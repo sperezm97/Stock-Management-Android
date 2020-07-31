@@ -1,25 +1,33 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, ScrollView, Dimensions } from "react-native";
-import { Block } from "../components";
-import { Product } from "../state/types/product.type";
-import { ProductServices } from "../services/productService";
-import { Theme } from "../constants";
-import Header from "../components/Header";
-import PhotoContainer from "../components/PhotoContainer";
-import { CategoryServices } from "../services/categoryService";
-import { Category } from "../state/types/category.type";
-import WithLoading from "../hooks/hoc/WithLoader";
+import React, { useState, useEffect } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Dimensions,
+  ImageBackground,
+} from 'react-native';
+import { Block } from '../components';
+import { Product } from '../state/types/product.type';
+import { ProductServices } from '../services/productService';
+import { Theme } from '../constants';
+import Header from '../components/Header';
+import PhotoContainer from '../components/PhotoContainer';
+import { CategoryServices } from '../services/categoryService';
+import { Category } from '../state/types/category.type';
+import WithLoading from '../hooks/hoc/WithLoader';
+import ProductCard from '../components/ProductCard';
 
 interface Props {}
 
-const screenWidth = Dimensions.get("window").width;
+const screenWidth = Dimensions.get('window').width;
 function ProductDetailsScreen() {
   const [product, setproduct] = useState<Product>({
-    sku: "",
+    sku: '',
     categoryId: 0,
-    name: "",
-    description: "",
-    photoUrl: "",
+    name: '',
+    description: '',
+    photoUrl: '',
     alertQuantity: 0,
     sellingPrice: 0,
     marginProfitability: 0,
@@ -27,48 +35,64 @@ function ProductDetailsScreen() {
   });
   const [category, setcategory] = useState<Category>({
     id: 0,
-    name: "",
-    description: "",
+    name: '',
+    description: '',
   });
+
+  const [editing, setediting] = useState(false);
+  const handleEditing = () => {
+    setediting(!editing);
+  };
   const fetchCategory = async () => {
     const newCategory = await CategoryServices.getCategory(product.categoryId);
     setcategory(newCategory);
   };
+  const fetchProduct = async () => {
+    const newProduct = await ProductServices.getProduct('IS000002');
+    setproduct(newProduct);
+  };
   const [loading, setloading] = useState<Boolean>(false);
   useEffect(() => {
     setloading(true);
-    const fetchProduct = async () => {
-      const newProduct = await ProductServices.getProduct("IS000001");
-      setproduct(newProduct);
-    };
     fetchProduct();
-    fetchCategory();
     setloading(false);
   }, []);
-
+  useEffect(() => {
+    fetchCategory();
+  });
   return (
     <View style={styles.detailsWraper}>
-      <ScrollView>
-        <View style={styles.header}>
-          <Header />
-        </View>
-        {(loading && <WithLoading />) || (
+      <View style={styles.header}>
+        <Header handleEditing={handleEditing} />
+      </View>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ flex: 1 }}>
+        {(loading && (
+          <View>
+            <Text>loading...</Text>
+          </View>
+        )) || (
           <View style={styles.container}>
-            <View style={styles.photoContainer}>
-              <PhotoContainer />
-            </View>
-            <View style={styles.content}>
-              <Text style={styles.title}>{product.name}</Text>
-              <Block title="Codigo de barra" description={product.sku} />
-              <Block title="Descripcion" description={product.description} />
-              <Block title="Unidades" description={product.units} />
-              <Block title="Categoria" description={category.name} />
-              <Block
-                title="Alerta de cantidad"
-                description={product.alertQuantity}
+            <ImageBackground
+              source={require('../assets/images/header-shape.png')}
+              style={styles.image}
+            />
+            <View style={{ top: '15%', alignItems: 'center' }}>
+              <View style={styles.photoContainer}>
+                <PhotoContainer />
+              </View>
+              <ProductCard
+                product={product}
+                category={category}
+                isEditable={editing}
               />
+              {/* {
+                <View
+                  style={{ paddingVertical: 190, backgroundColor: 'black' }}
+                />
+              } */}
             </View>
-            {/* <View style={{ paddingVertical: 190, backgroundColor: "black" }} /> */}
           </View>
         )}
       </ScrollView>
@@ -82,30 +106,22 @@ export default ProductDetailsScreen;
 
 const styles = StyleSheet.create({
   container: {
-    height: "auto",
-    flexDirection: "column",
-    alignItems: "center",
-    top: 90,
+    alignItems: 'center',
   },
   detailsWraper: {
     backgroundColor: Theme.colors.white,
     flex: 1,
+    width: screenWidth,
   },
-  photoContainer: {
-    flex: 1,
-  },
-  content: {
-    flex: 1,
-    top: "5%",
-    paddingBottom: "50%",
-  },
+  photoContainer: { zIndex: 0 },
   header: {
-    position: "absolute",
+    zIndex: 1,
   },
-  title: {
-    fontSize: 30,
-    fontFamily: "segoe-ui-bold",
-    color: Theme.colors.dark.background,
-    textAlign: "center",
+  image: {
+    height: 500,
+    width: '100%',
+    transform: [{ translateY: -90 }],
+    position: 'absolute',
+    zIndex: 0,
   },
 });
