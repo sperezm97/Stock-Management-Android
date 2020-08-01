@@ -41,11 +41,11 @@ function ProductDetailsScreen() {
   };
   const fetchCategory = async () => {
     const newCategory = await CategoryServices.getCategory(product.categoryId);
-    setCategory(newCategory);
+    setCategory(newCategory.data);
   };
   const fetchProduct = async () => {
     const newProduct = await ProductServices.getProduct('IS000002');
-    setProduct(newProduct);
+    setProduct(newProduct.data);
   };
   const [loading, setLoading] = useState<Boolean>(false);
   useEffect(() => {

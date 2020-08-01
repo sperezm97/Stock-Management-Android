@@ -17,7 +17,7 @@ import {
   ProductsParamList,
   CategoriesParamList,
 } from '../types';
-import ProductDetailsScreen from '../screens/ProductDetailsScreen';
+import ProductDetailsScreen from '../screens/Product/Details';
 import ProductsListScreen from '../screens/ProductsListScreen';
 import { productActions } from '../state/domain/actions/product.action';
 import CategoriesScreen from '../screens/CategoriesScreen';

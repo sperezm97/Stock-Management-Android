@@ -9,19 +9,16 @@ const headers = {
     Accept: 'application/json',
   },
 };
-const getProducts = async () => {
-  try {
-    const products = await axios.get<Product[]>(url);
-    return products.data;
-  } catch (e) {
-    console.log(e);
-  }
-};
+const getProducts = () => axios.get<Product[]>(url);
 
-const getProduct = async (sku: string) => {
+const getProduct = (sku: string) => {
   let productUrl = `${url}/${sku}`;
+<<<<<<< HEAD
   const product = await axios.get<Product>(productUrl, headers);
   return product.data;
+=======
+  return axios.get<Product>(productUrl, headers);
+>>>>>>> 790cfd1373f6e25d371176abd600efa1b6ee60c5
 };
 
 const getProductsByCategory = async (categoryId: number) => {
