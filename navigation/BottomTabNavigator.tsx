@@ -1,9 +1,6 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {
-  createStackNavigator,
-  StackNavigationOptions,
-} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 
 import { Theme } from '../constants/';
@@ -16,11 +13,16 @@ import {
   TabTwoParamList,
   ProductsParamList,
   CategoriesParamList,
+  AddProductParamList,
 } from '../types';
 import ProductDetailsScreen from '../screens/Product/Details';
-import ProductsListScreen from '../screens/ProductsListScreen';
-import { productActions } from '../state/domain/actions/product.action';
+import ProductsListScreen from '../screens/Product/ProductsList';
 import CategoriesScreen from '../screens/CategoriesScreen';
+import AddProductScreen from '../screens/Product/AddProduct';
+import { View } from '../components/Themed';
+import { Button } from 'react-native';
+import TabBarIcon from '../components/TabBarIcon';
+import AddButton from '../components/AddButton';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -47,7 +49,7 @@ export default function BottomTabNavigator() {
         component={ProductsListNavigator}
         options={{
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="kitchen" color={color} />
+            <TabBarIcon name="kitchen" color={color} size={18} />
           ),
         }}
       />
@@ -55,14 +57,32 @@ export default function BottomTabNavigator() {
         component={TabOneNavigator}
         name="TabOne"
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="book" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="book" color={color} size={18} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        component={AddProductNavigator}
+        name="AddProduct"
+        options={{
+          tabBarIcon: ({ color }) => (
+            <View
+              style={{ bottom: 30, borderRadius: 36, position: 'absolute' }}>
+              <TabBarIcon name="add-circle" color={color} size={50} />
+            </View>
+          ),
+          tabBarLabel: () => <View style={{ position: 'absolute' }}></View>,
         }}
       />
       <BottomTab.Screen
         name="TabTwo"
         component={TabTwoNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
+          // tabBarButton: () => <AddButton />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="compare" color={color} size={18} />
+          ),
         }}
       />
       <BottomTab.Screen name="Categories" component={CategoriesNavigator} />
@@ -72,9 +92,6 @@ export default function BottomTabNavigator() {
 
 // You can explore the built-in icon families and icons on the web at:
 // https://icons.expo.fyi/
-function TabBarIcon(props: { name: string; color: string }) {
-  return <MaterialIcons size={18} style={{ marginBottom: -3 }} {...props} />;
-}
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
@@ -153,5 +170,14 @@ function CategoriesNavigator() {
         component={CategoriesScreen}
       />
     </CategoriesStack.Navigator>
+  );
+}
+
+const AddProductStack = createStackNavigator<AddProductParamList>();
+function AddProductNavigator() {
+  return (
+    <AddProductStack.Navigator>
+      <AddProductStack.Screen name="AddProduct" component={AddProductScreen} />
+    </AddProductStack.Navigator>
   );
 }

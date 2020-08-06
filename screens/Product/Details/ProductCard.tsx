@@ -31,21 +31,21 @@ function ProductCard(props: Props) {
       {({ values, handleBlur, handleChange }) => (
         <View style={{ flex: 1 }}>
           <View>
-            <Text style={styles.productname}>{defaultValue.product.name}</Text>
+            <Text style={styles.productName}>{defaultValue.product.name}</Text>
           </View>
           <Input
             label="Codigo de Barra"
-            value={values.sku}
+            value={defaultValue.product.sku}
             onChangeText={handleChange('sku')}
-            onBlur={handleBlur('description')}
-            placeholder={defaultValue.product.sku}
-            editable={isEditable}
+            onBlur={handleBlur('sku')}
+            editable={false}
           />
           <Input
+            multiline={true}
             label="Description"
             value={values.description}
             onChangeText={handleChange('description')}
-            onBlur={handleBlur('units')}
+            onBlur={handleBlur('description')}
             placeholder={defaultValue.product.description}
             editable={isEditable}
           />
@@ -53,7 +53,7 @@ function ProductCard(props: Props) {
             label="Unidades"
             value={values.units}
             onChangeText={handleChange('units')}
-            onBlur={handleBlur('category')}
+            onBlur={handleBlur('units')}
             placeholder={defaultValue.product.units.toString()}
             editable={isEditable}
             keyboardType="number-pad"
@@ -62,7 +62,7 @@ function ProductCard(props: Props) {
             label="Categoria"
             value={values.category}
             onChangeText={handleChange('category')}
-            onBlur={handleBlur('alertQuantity')}
+            onBlur={handleBlur('category')}
             placeholder={defaultValue.category.name}
             editable={isEditable}
           />
@@ -70,7 +70,7 @@ function ProductCard(props: Props) {
             label="Alerta de Cantidad"
             value={values.alertQuantity}
             onChangeText={handleChange('alertQuantity')}
-            onBlur={handleBlur('')}
+            onBlur={handleBlur('alertQuantity')}
             placeholder={defaultValue.product.alertQuantity.toString()}
             editable={isEditable}
             keyboardType="number-pad"
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '77%',
   },
-  productname: {
+  productName: {
     fontSize: 30,
     fontFamily: 'segoe-ui-bold',
     color: Theme.colors.dark.background,

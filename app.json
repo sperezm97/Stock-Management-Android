@@ -15,9 +15,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -36,6 +34,22 @@
     "./src/*.{js,jsx,ts,tsx}": [
       "npx prettier --write",
       "eslint src/*.js --fix-dry-run"
+    ]
+  },
+  "packagerOpts": {
+    "config": "metro.config.js",
+    "sourceExts": [
+      "expo.ts",
+      "expo.tsx",
+      "expo.js",
+      "expo.jsx",
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "wasm",
+      "svg"
     ]
   }
 }
