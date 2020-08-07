@@ -140,13 +140,14 @@ function ProductsListNavigator() {
         name="ProductsListScreen"
         component={ProductsListScreen}
         options={{
-          headerTitle: 'Products',
-          headerTitleStyle: {
-            fontSize: Theme.fonts.h1.fontSize,
-            color: Theme.colors.gray,
-            fontFamily: 'segoe-ui-bold',
-          },
-          headerTitleAlign: 'center',
+          headerShown: false,
+          // headerTitle: 'Products',
+          // headerTitleStyle: {
+          //   fontSize: Theme.fonts.h1.fontSize,
+          //   color: Theme.colors.gray,
+          //   fontFamily: 'segoe-ui-bold',
+          // },
+          // headerTitleAlign: 'center',
         }}
       />
       <ProductsListStack.Screen

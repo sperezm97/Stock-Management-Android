@@ -71,7 +71,7 @@ type ProductsScreenRouteProp = RouteProp<
   ProductsParamList,
   'ProductsListScreen'
 >;
-type ProductDetailsScreenRouteProp = RouteProp<
+export type ProductDetailsScreenRouteProp = RouteProp<
   ProductsParamList,
   'ProductDetailsScreen'
 >;

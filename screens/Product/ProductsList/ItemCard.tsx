@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { images, Theme } from '../../../constants';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
+import { ProductsScreenNavigationProp } from '../../../types';
 
 interface Props {
   name: string;
@@ -9,6 +11,7 @@ interface Props {
   uri?: string;
 }
 function ItemCard({ name, sku, uri }: Props) {
+  const navigation = useNavigation<ProductsScreenNavigationProp>();
   function imageHandler() {
     if (typeof uri === 'string') {
       return <Image source={{ uri: uri }} style={styles.image} />;
@@ -22,7 +25,8 @@ function ItemCard({ name, sku, uri }: Props) {
     }
   }
   return (
-    <TouchableOpacity onPress={() => console.log(sku)}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate('ProductDetailsScreen', { sku: sku })}>
       <View style={styles.container}>
         <View style={styles.imageContainer}>{imageHandler()}</View>
         <View style={styles.textContainer}>
@@ -50,13 +54,19 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginVertical: 10,
   },
-  image: {},
+  image: {
+    resizeMode: 'contain',
+    width: '100%',
+    height: '100%',
+  },
   imageContainer: {
     width: '100%',
     height: 102,
-    backgroundColor: Theme.colors.white,
+    backgroundColor: '#FFF',
     justifyContent: 'center',
     alignItems: 'center',
+    borderTopStartRadius: 8,
+    borderTopEndRadius: 8,
   },
   name: {
     fontFamily: 'segoe-ui-semi',

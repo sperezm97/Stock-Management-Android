@@ -10,8 +10,8 @@ import WithLoading from '../../../hooks/hoc/WithLoader';
 import ProductCard from './ProductCard';
 import styles from './styles';
 import { images } from '../../../constants';
-
-interface Props {}
+import { useNavigation, useRoute, Route } from '@react-navigation/native';
+import { ProductDetailsScreenRouteProp } from '../../../types';
 
 function ProductDetailsScreen() {
   const [product, setProduct] = useState<Product>({
@@ -32,11 +32,16 @@ function ProductDetailsScreen() {
   });
   const [editing, setEditing] = useState(false);
   const [loading, setLoading] = useState<boolean>(true);
-
-  const fetchProduct = async () => {
+  // route
+  const route = useRoute<ProductDetailsScreenRouteProp>();
+  useEffect(() => {
+    const sku = route.params.sku;
+    fetchProduct(sku);
+  }, []);
+  const fetchProduct = async (sku: string) => {
     setLoading(true);
     try {
-      const newProduct = await ProductServices.getProduct('IS000002');
+      const newProduct = await ProductServices.getProduct(sku);
       setProduct(newProduct);
 
       const { data: newCategory } = await CategoryServices.getCategory(
@@ -49,9 +54,6 @@ function ProductDetailsScreen() {
       setLoading(false);
     }
   };
-  useEffect(() => {
-    fetchProduct();
-  }, []);
 
   const handleEditing = () => {
     const updateEdit = (prev: boolean) => !prev;

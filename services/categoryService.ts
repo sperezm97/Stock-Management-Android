@@ -12,7 +12,7 @@ const headers = {
 };
 const getCategories = async () => {
   const categories = await axios.get<Category[]>(url);
-  return categories.data;
+  return categories;
 };
 
 const getCategory = (id: number) => {
