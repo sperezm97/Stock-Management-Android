@@ -11,17 +11,16 @@ interface Props {
 function SearchBox({ setValueInput, valueInput, newProducts }: Props) {
   return (
     <View style={styles.container}>
-      <View style={{ justifyContent: 'center', marginRight: 10 }}>
+      <View style={styles.containerInput}>
         <TabBarIcon name="search" color="#919191" size={18} />
+        <TextInput
+          onChangeText={setValueInput}
+          blurOnSubmit
+          placeholder="Busca tus productos"
+          onChange={() => newProducts(valueInput)}
+          value={valueInput}
+        />
       </View>
-      <TextInput
-        onChangeText={setValueInput}
-        blurOnSubmit
-        placeholder="Busca tus productos"
-        onChange={() => newProducts(valueInput)}
-        value={valueInput}
-        style={styles.input}
-      />
     </View>
   );
 }
@@ -29,14 +28,12 @@ function SearchBox({ setValueInput, valueInput, newProducts }: Props) {
 export default SearchBox;
 
 const styles = StyleSheet.create({
-  input: {
-    flex: 1,
-  },
   container: {
-    width: '80%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  containerInput: {
     flexDirection: 'row',
-    paddingLeft: 16,
-    height: 42,
     borderColor: '#F5F5F5',
     borderWidth: 1,
     shadowOffset: {
@@ -49,6 +46,8 @@ const styles = StyleSheet.create({
     shadowColor: '#919191',
     shadowOpacity: 0.16,
     borderRadius: 8,
-    justifyContent: 'center',
+    padding: 16,
+    width: '90%',
+    marginVertical: 10,
   },
 });

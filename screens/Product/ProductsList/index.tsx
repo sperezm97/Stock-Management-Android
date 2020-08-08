@@ -55,17 +55,21 @@ const ProductsListScreen = () => {
   };
   return (
     <View style={styles.container}>
-      <WithLoading isLoading={loading}>
-        <SafeAreaView style={styles.header}>
-          <SearchBox
-            valueInput={valueInput}
-            setValueInput={setValueInput}
-            newProducts={handleSearchInput}
-          />
+      <View style={styles.header}>
+        <SearchBox
+          valueInput={valueInput}
+          setValueInput={setValueInput}
+          newProducts={handleSearchInput}
+        />
+        <>
           <CategoriesList categories={categories} />
-        </SafeAreaView>
-        <ItemsList products={filteredProducts} />
-      </WithLoading>
+        </>
+      </View>
+      <View>
+        <WithLoading isLoading={loading}>
+          <ItemsList products={filteredProducts} />
+        </WithLoading>
+      </View>
     </View>
   );
 };
