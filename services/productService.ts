@@ -11,9 +11,10 @@ const headers = {
 };
 const getProducts = () => axios.get<Product[]>(url);
 
-const getProduct = (sku: string) => {
+const getProduct = async (sku: string) => {
   let productUrl = `${url}/${sku}`;
-  return axios.get<Product>(productUrl, headers);
+  const product = await axios.get<Product>(productUrl, headers);
+  return product.data;
 };
 
 const getProductsByCategory = async (categoryId: number) => {

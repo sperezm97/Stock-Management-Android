@@ -12,6 +12,7 @@ export type BottomTabParamList = {
   TabTwo: undefined;
   Products: undefined;
   Categories: undefined;
+  AddProduct: undefined;
 };
 
 export type ProductsParamList = {
@@ -23,14 +24,15 @@ export type ProductsParamList = {
 export type TabOneParamList = {
   TabOneScreen: undefined;
 };
-
 export type TabTwoParamList = {
   TabTwoScreen: undefined;
 };
 export type CategoriesParamList = {
   CategoriesScreen: undefined;
 };
-
+export type AddProductParamList = {
+  AddProduct: undefined;
+};
 // Type Checking param List
 
 export type AppStackParamList = {
@@ -69,7 +71,7 @@ type ProductsScreenRouteProp = RouteProp<
   ProductsParamList,
   'ProductsListScreen'
 >;
-type ProductDetailsScreenRouteProp = RouteProp<
+export type ProductDetailsScreenRouteProp = RouteProp<
   ProductsParamList,
   'ProductDetailsScreen'
 >;

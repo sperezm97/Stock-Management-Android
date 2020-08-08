@@ -25,7 +25,7 @@ export default function Input(props: Props): React.ReactElement {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
-      <TextInput {...rest} style={styles.input} />
+      <TextInput multiline={true} {...rest} style={styles.input} />
     </View>
   );
 }
@@ -38,7 +38,7 @@ const styles = StyleSheet.create<Styles>({
     height: 45,
     fontSize: Theme.fonts.caption.fontSize,
     color: Theme.colors.gray,
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 1,
     borderBottomColor: Theme.colors.primary,
   },
   label: {

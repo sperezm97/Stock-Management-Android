@@ -3,7 +3,7 @@ import { Theme } from '../../../constants';
 
 interface Styles {
   container: ViewStyle;
-  detailsWraper: ViewStyle;
+  detailsWrapper: ViewStyle;
   photoContainer: ViewStyle;
   header: ViewStyle;
   image: ImageStyle;
@@ -14,12 +14,12 @@ export default StyleSheet.create<Styles>({
     flex: 1,
     alignItems: 'center',
   },
-  detailsWraper: {
+  detailsWrapper: {
     backgroundColor: Theme.colors.white,
     flex: 1,
     width: Dimensions.get('window').width,
   },
-  photoContainer: { zIndex: 0 },
+  photoContainer: { zIndex: 1, marginBottom: 35 },
   header: {
     zIndex: 1,
   },

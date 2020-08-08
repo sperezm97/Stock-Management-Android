@@ -21,7 +21,10 @@ function PhotoContainer({ uri }: Props) {
   }
   return (
     <View style={styles.container}>
-      <ImageBackground source={images.noImage} style={styles.imageContainer} />
+      <ImageBackground
+        source={images.circleShape}
+        style={styles.imageContainer}
+      />
       <View style={styles.circle}>{imageHandler()}</View>
     </View>
   );

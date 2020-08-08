@@ -12,7 +12,7 @@ const headers = {
 };
 const getCategories = async () => {
   const categories = await axios.get<Category[]>(url);
-  return categories.data;
+  return categories;
 };
 
 const getCategory = (id: number) => {
@@ -20,7 +20,7 @@ const getCategory = (id: number) => {
   return axios.get<Category>(categoryUrl, headers);
 };
 
-const addCategory = async (category: Category, photo: File) => {
+const addCategory = async (category: Category) => {
   const newCategory = (await axios.post<Category>(url, category, headers)).data;
   return newCategory;
 };
@@ -28,7 +28,7 @@ const addCategory = async (category: Category, photo: File) => {
 const updateCategory = async (id: number, category: Category) => {
   const categoryUrl = `${url}/${id}`;
   await axios.put<Category>(categoryUrl, category, headers);
-  return console.log(`category updtated with id ${category.id}`);
+  return console.log(`category updated with id ${category.id}`);
 };
 
 const deleteCategory = async (id: number) => {

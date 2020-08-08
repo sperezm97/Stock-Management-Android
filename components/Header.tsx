@@ -5,6 +5,7 @@ import {
   ImageBackground,
   StyleSheet,
   Dimensions,
+  SafeAreaView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { ProductsScreenNavigationProp } from '../types';
@@ -20,7 +21,7 @@ interface Props {
 const Header = ({ handleEditing }: Props) => {
   const navigation = useNavigation<ProductsScreenNavigationProp>();
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <LinearGradient
         colors={['#104BD6', '#186DE5']}
         style={{
@@ -62,7 +63,7 @@ const Header = ({ handleEditing }: Props) => {
           />
         </TouchableOpacity>
       </LinearGradient>
-    </View>
+    </SafeAreaView>
   );
 };
 

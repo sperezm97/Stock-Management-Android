@@ -6,14 +6,14 @@ import { Text, View } from '../components/Themed';
 import { useEffect, useState } from 'react';
 import { Product } from '../state/types/product.type';
 import { ProductServices } from '../services/productService';
-
+// import photoShape from '../assets/images/photo-shape.svg';
 export default function TabOneScreen() {
   const [products, setproduct] = useState<Product[] | undefined>([]);
 
   useEffect(() => {
     const fetchDataAsync = async () => {
       const product = await ProductServices.getProducts();
-      setproduct(product);
+      setproduct(product.data);
     };
     fetchDataAsync();
   }, []);
