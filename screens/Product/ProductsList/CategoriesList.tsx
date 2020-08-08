@@ -13,8 +13,11 @@ function CategoriesList(props: Props) {
       data={categories}
       showsHorizontalScrollIndicator={false}
       horizontal={true}
-      renderItem={({ item }) => <CategoryItem id={item.id} name={item.name} />}
+      renderItem={({ item }) => (
+        <CategoryItem {...{ id: item.id, name: item.name }} />
+      )}
       keyExtractor={(item) => item.id.toString()}
+      contentContainerStyle={{ height: 40 }}
     />
   );
 }
