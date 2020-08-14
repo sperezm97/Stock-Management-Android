@@ -6,14 +6,21 @@ import * as React from 'react';
 import { Theme } from '../constants/';
 import useColorScheme from '../hooks/useColorScheme';
 import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import TabTwoScreen from '../screens/Scanner/ScannerScreen';
 import {
   BottomTabParamList,
   TabOneParamList,
-  TabTwoParamList,
+  ScannerScreenParamList,
   ProductsParamList,
   CategoriesParamList,
   AddProductParamList,
+  RootStackParamList,
+  NavigationProps,
+  ProductsScreenNavigationProp,
+  StackProps,
+  ProductsScreenRouteProp,
+  ProductDetailsScreenRouteProp,
+  RootBottomTabNavigationProp,
 } from '../types';
 import ProductDetailsScreen from '../screens/Product/Details';
 import ProductsListScreen from '../screens/Product/ProductsList';
@@ -23,6 +30,9 @@ import { View } from '../components/Themed';
 import { Button } from 'react-native';
 import TabBarIcon from '../components/TabBarIcon';
 import AddButton from '../components/AddButton';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import ProductsListNavigator from './ProductsListNavigator';
+import ScannerScreen from '../screens/Scanner/ScannerScreen';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -67,8 +77,7 @@ export default function BottomTabNavigator() {
         name="AddProduct"
         options={{
           tabBarIcon: ({ color }) => (
-            <View
-              style={{ bottom: 30, borderRadius: 36, position: 'absolute' }}>
+            <View style={{ bottom: 5, borderRadius: 36 }}>
               <TabBarIcon name="add-circle" color={color} size={50} />
             </View>
           ),
@@ -76,7 +85,7 @@ export default function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
+        name="Scanner"
         component={TabTwoNavigator}
         options={{
           // tabBarButton: () => <AddButton />,
@@ -117,48 +126,25 @@ function TabOneNavigator() {
   );
 }
 
-const TabTwoStack = createStackNavigator<TabTwoParamList>();
+const TabTwoStack = createStackNavigator<ScannerScreenParamList>();
 
 function TabTwoNavigator() {
   return (
     <TabTwoStack.Navigator>
       <TabTwoStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
+        name="Scanner"
+        component={ScannerScreen}
+        options={{
+          headerTitle: 'Escaner',
+          headerTitleStyle: {
+            fontSize: Theme.fonts.h2.fontSize,
+            color: Theme.colors.gray,
+            fontFamily: 'segoe-ui-bold',
+          },
+          headerTitleAlign: 'center',
+        }}
       />
     </TabTwoStack.Navigator>
-  );
-}
-
-const ProductsListStack = createStackNavigator<ProductsParamList>();
-
-function ProductsListNavigator() {
-  return (
-    <ProductsListStack.Navigator>
-      <ProductsListStack.Screen
-        name="ProductsListScreen"
-        component={ProductsListScreen}
-        options={{
-          headerShown: false,
-          // headerTitle: 'Products',
-          // headerTitleStyle: {
-          //   fontSize: Theme.fonts.h1.fontSize,
-          //   color: Theme.colors.gray,
-          //   fontFamily: 'segoe-ui-bold',
-          // },
-          // headerTitleAlign: 'center',
-        }}
-      />
-      <ProductsListStack.Screen
-        name="ProductDetailsScreen"
-        component={ProductDetailsScreen}
-        options={{
-          headerShown: false,
-        }}
-        initialParams={{ sku: '' }}
-      />
-    </ProductsListStack.Navigator>
   );
 }
 

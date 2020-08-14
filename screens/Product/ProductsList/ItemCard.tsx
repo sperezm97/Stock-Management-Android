@@ -3,7 +3,10 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import { images, Theme } from '../../../constants';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-import { ProductsScreenNavigationProp } from '../../../types';
+import {
+  ProductsScreenNavigationProp,
+  ProductDetailsScreenNavigationProp,
+} from '../../../types';
 
 interface Props {
   name: string;
@@ -11,7 +14,7 @@ interface Props {
   uri?: string;
 }
 function ItemCard({ name, sku, uri }: Props) {
-  const navigation = useNavigation<ProductsScreenNavigationProp>();
+  const navigation = useNavigation<ProductDetailsScreenNavigationProp>();
   function imageHandler() {
     if (typeof uri === 'string') {
       return <Image source={{ uri: uri }} style={styles.image} />;

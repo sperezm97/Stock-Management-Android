@@ -11,7 +11,10 @@ import ProductCard from './ProductCard';
 import styles from './styles';
 import { images } from '../../../constants';
 import { useNavigation, useRoute, Route } from '@react-navigation/native';
-import { ProductDetailsScreenRouteProp } from '../../../types';
+import {
+  ProductDetailsScreenRouteProp,
+  RootScreenRouteProp,
+} from '../../../types';
 
 function ProductDetailsScreen() {
   const [product, setProduct] = useState<Product>({
@@ -70,13 +73,11 @@ function ProductDetailsScreen() {
       <View style={styles.header}>
         <Header handleEditing={handleEditing} />
       </View>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ flex: 1 }}>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <WithLoading isLoading={loading}>
           <View style={styles.container}>
             <ImageBackground source={images.headerShape} style={styles.image} />
-            <View style={{ top: '15%', alignItems: 'center' }}>
+            <View style={{ top: '12%', alignItems: 'center', width: '80%' }}>
               <View style={styles.photoContainer}>
                 <PhotoContainer />
               </View>
@@ -85,11 +86,6 @@ function ProductDetailsScreen() {
                 onSubmit={onSubmit}
                 isEditable={editing}
               />
-              {/* {
-                <View
-                  style={{ paddingVertical: 190, backgroundColor: 'black' }}
-                />
-              } */}
             </View>
           </View>
         </WithLoading>

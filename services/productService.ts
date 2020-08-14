@@ -9,18 +9,28 @@ const headers = {
     Accept: 'application/json',
   },
 };
-const getProducts = () => axios.get<Product[]>(url);
+const getProducts = (query?: string) => {
+  if (typeof query === 'string') {
+    let productsUrl = `${url}?search=${query}`;
+    return axios.get<Product[]>(productsUrl);
+  }
+  return axios.get<Product[]>(url);
+};
+
+const getProductsByCategory = async (categoryId: number, query?: string) => {
+  let productsUrl = `${url}?category_id=${categoryId}`;
+
+  if (typeof query === 'string') {
+    productsUrl = `${url}?category_id=${categoryId}&search=${query}`;
+    return await axios.get<Product[]>(productsUrl);
+  }
+  return await axios.get<Product[]>(productsUrl);
+};
 
 const getProduct = async (sku: string) => {
   let productUrl = `${url}/${sku}`;
   const product = await axios.get<Product>(productUrl, headers);
   return product.data;
-};
-
-const getProductsByCategory = async (categoryId: number) => {
-  let productsUrl = `${url}/${categoryId}`;
-  const products = await axios.get<Product[]>(productsUrl);
-  return products.data;
 };
 
 const addProduct = async (product: Product) => {

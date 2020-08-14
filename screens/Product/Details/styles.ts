@@ -19,7 +19,7 @@ export default StyleSheet.create<Styles>({
     flex: 1,
     width: Dimensions.get('window').width,
   },
-  photoContainer: { zIndex: 1, marginBottom: 35 },
+  photoContainer: { zIndex: 1, marginBottom: 40 },
   header: {
     zIndex: 1,
   },

@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "stock-management-android",
-    "slug": "stock-management-android",
+    "slug": "stock-management-androidd",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -25,7 +25,7 @@
       "favicon": "./assets/images/favicon.png"
     },
     "description": "",
-    "githubUrl": "https://github.com/juancarlosf2/Stock-Management-Android/tree/remote"
+    "githubUrl": "https://github.com/juancarlosf2/Stock-Management-Android/"
   },
   "husky": {
     "hooks": {

@@ -29,7 +29,7 @@ function ProductCard(props: Props) {
   return (
     <Formik initialValues={initialValues} onSubmit={onSubmit}>
       {({ values, handleBlur, handleChange }) => (
-        <View style={{ flex: 1 }}>
+        <View style={{}}>
           <View>
             <Text style={styles.productName}>{defaultValue.product.name}</Text>
           </View>

@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import TabBarIcon from '../../../components/TabBarIcon';
 import { TextInput } from 'react-native-gesture-handler';
+import { validateYupSchema } from 'formik';
 
 interface Props {
   setValueInput: React.Dispatch<React.SetStateAction<string>>;
@@ -11,16 +12,17 @@ interface Props {
 function SearchBox({ setValueInput, valueInput, newProducts }: Props) {
   return (
     <View style={styles.container}>
-      <View style={styles.containerInput}>
+      <View style={{ justifyContent: 'center', marginRight: 10 }}>
         <TabBarIcon name="search" color="#919191" size={18} />
-        <TextInput
-          onChangeText={setValueInput}
-          blurOnSubmit
-          placeholder="Busca tus productos"
-          onChange={() => newProducts(valueInput)}
-          value={valueInput}
-        />
       </View>
+      <TextInput
+        onChangeText={setValueInput}
+        blurOnSubmit
+        placeholder="Busca tus productos"
+        onSubmitEditing={() => newProducts(valueInput)}
+        value={valueInput}
+        style={styles.input}
+      />
     </View>
   );
 }
@@ -28,12 +30,14 @@ function SearchBox({ setValueInput, valueInput, newProducts }: Props) {
 export default SearchBox;
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
+  input: {
+    flex: 1,
   },
-  containerInput: {
+  container: {
+    width: '90%',
     flexDirection: 'row',
+    padding: 10,
+    height: 42,
     borderColor: '#F5F5F5',
     borderWidth: 1,
     shadowOffset: {
@@ -46,8 +50,7 @@ const styles = StyleSheet.create({
     shadowColor: '#919191',
     shadowOpacity: 0.16,
     borderRadius: 8,
-    padding: 16,
-    width: '90%',
+    justifyContent: 'center',
     marginVertical: 10,
   },
 });
