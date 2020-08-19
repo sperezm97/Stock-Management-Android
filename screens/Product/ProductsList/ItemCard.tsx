@@ -46,7 +46,8 @@ export default ItemCard;
 const styles = StyleSheet.create({
   container: {
     width: 150,
-    minHeight: 150,
+
+    minHeight: 180,
     borderRadius: 8,
     borderWidth: 0.5,
     borderColor: '#E5E5E5',
@@ -58,13 +59,15 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   image: {
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     width: '100%',
     height: '100%',
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
   },
   imageContainer: {
     width: '100%',
-    height: 102,
+    height: 100,
     backgroundColor: '#FFF',
     justifyContent: 'center',
     alignItems: 'center',

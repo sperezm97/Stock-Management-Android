@@ -11,6 +11,7 @@ export default StyleSheet.create<Styles>({
   container: {
     flex: 1,
     width: Dimensions.get('screen').width,
+    height: Dimensions.get('screen').height,
   },
   header: {
     alignItems: 'center',
@@ -19,5 +20,6 @@ export default StyleSheet.create<Styles>({
   },
   content: {
     alignItems: 'center',
+    height: '82%',
   },
 });

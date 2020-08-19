@@ -22,10 +22,10 @@ function ProductDetailsScreen() {
     categoryId: 0,
     name: '',
     description: '',
-    photoUrl: '',
+    photoUri: '',
     alertQuantity: 0,
     sellingPrice: 0,
-    marginProfitability: 0,
+    quantity: 0,
     units: 0,
   });
   const [category, setCategory] = useState<Category>({
@@ -79,7 +79,7 @@ function ProductDetailsScreen() {
             <ImageBackground source={images.headerShape} style={styles.image} />
             <View style={{ top: '12%', alignItems: 'center', width: '80%' }}>
               <View style={styles.photoContainer}>
-                <PhotoContainer />
+                <PhotoContainer uri={product.photoUri} />
               </View>
               <ProductCard
                 defaultValue={{ product, category }}

@@ -2,7 +2,7 @@ import { Category } from '../state/types/category.type';
 import axios from 'axios';
 
 // const url = "https://localhost:44397/api/categories";
-const url = 'https://stockmanagement2018.azurewebsites.net/api/categories';
+const url = 'https://stockmanagement2017.azurewebsites.net/api/categories';
 
 const headers = {
   headers: {

@@ -25,11 +25,10 @@ const initialValues = {
 
 function ProductCard(props: Props) {
   const { onSubmit, isEditable, defaultValue } = props;
-  console.log(defaultValue);
   return (
     <Formik initialValues={initialValues} onSubmit={onSubmit}>
       {({ values, handleBlur, handleChange }) => (
-        <View style={{}}>
+        <View style={styles.content}>
           <View>
             <Text style={styles.productName}>{defaultValue.product.name}</Text>
           </View>
@@ -71,7 +70,11 @@ function ProductCard(props: Props) {
             value={values.alertQuantity}
             onChangeText={handleChange('alertQuantity')}
             onBlur={handleBlur('alertQuantity')}
-            placeholder={defaultValue.product.alertQuantity.toString()}
+            placeholder={
+              defaultValue.product.alertQuantity
+                ? defaultValue.product.alertQuantity.toString()
+                : '0'
+            }
             editable={isEditable}
             keyboardType="number-pad"
           />
@@ -85,9 +88,7 @@ export default ProductCard;
 
 const styles = StyleSheet.create({
   content: {
-    top: '8%',
-    alignItems: 'center',
-    width: '77%',
+    minWidth: '100%',
   },
   productName: {
     fontSize: 30,
@@ -104,7 +105,7 @@ const styles = StyleSheet.create({
     width: 314.67,
     borderBottomWidth: 1,
     borderBottomColor: Theme.colors.primary,
-    marginTop: 2,
+    marginTop: 1,
   },
   title: {
     fontSize: Theme.fonts.body.fontSize,

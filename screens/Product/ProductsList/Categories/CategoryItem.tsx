@@ -7,27 +7,43 @@ interface Props {
   id: number;
   name: string;
   setProductsByCategory: (id: number) => Promise<void>;
+  setSelectedCategory: React.Dispatch<
+    React.SetStateAction<{
+      id: number;
+    }>
+  >;
+  selectedCategory: {
+    id: number;
+  };
 }
 interface Styles {
   container: ViewStyle;
   category: TextStyle;
+  selectedCategory: TextStyle;
 }
 
 function CategoryItem(props: Props) {
-  const [isActive, setIsActive] = useState<boolean>(false);
-  const { name, id, setProductsByCategory } = props;
+  const {
+    name,
+    id,
+    setProductsByCategory,
+    setSelectedCategory,
+    selectedCategory,
+  } = props;
+
   const handleTouch = (id: number) => {
     setProductsByCategory(id);
-    setIsActive(!isActive);
+    setSelectedCategory({ id: id });
   };
   return (
     <TouchableOpacity onPress={() => handleTouch(id)}>
       <View style={styles.container}>
         <Text
-          style={{
-            color: isActive ? Theme.colors.primary : '#919191',
-            fontSize: Theme.fonts.caption.fontSize,
-          }}>
+          style={
+            id === selectedCategory.id
+              ? styles.selectedCategory
+              : styles.category
+          }>
           {name}
         </Text>
       </View>
@@ -48,5 +64,12 @@ const styles = StyleSheet.create<Styles>({
     marginRight: 10,
     padding: 5,
   },
-  category: {},
+  category: {
+    color: '#919191',
+    fontSize: Theme.fonts.caption.fontSize,
+  },
+  selectedCategory: {
+    color: Theme.colors.primary,
+    fontSize: Theme.fonts.caption.fontSize,
+  },
 });

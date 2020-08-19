@@ -6,9 +6,11 @@ interface Props {
   uri: string | undefined;
 }
 
-function PhotoContainer({ uri }: Props) {
+function PhotoContainer(props: Props) {
+  const { uri } = props;
   function imageHandler() {
-    if (typeof uri === 'string') {
+    console.log(uri);
+    if (typeof uri == 'string') {
       return <Image source={{ uri: uri }} style={styles.image} />;
     }
     return (
@@ -54,8 +56,8 @@ const styles = StyleSheet.create({
   },
   image: {
     resizeMode: 'contain',
-    width: 145,
-    height: 145,
+    width: 135,
+    height: 135,
     borderRadius: 100,
   },
 });

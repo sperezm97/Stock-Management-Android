@@ -49,7 +49,6 @@ const ProductsListScreen = () => {
         setFilteredProducts([...products]);
       } else {
         setFilteredProducts([...newProducts]);
-        console.log(filteredProducts);
       }
     }, 1000);
   };

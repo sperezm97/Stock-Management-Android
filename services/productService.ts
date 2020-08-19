@@ -2,7 +2,7 @@ import { Product } from '../state/types/product.type';
 import axios from 'axios';
 
 // const url = "https://localhost:5001/api/products";
-const url = 'https://stockmanagement2018.azurewebsites.net/api/products';
+const url = 'https://stockmanagement2017.azurewebsites.net/api/products';
 const headers = {
   headers: {
     'content-type': 'application/json',

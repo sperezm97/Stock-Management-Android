@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, Dimensions } from 'react-native';
 import { Product } from '../../../state/types/product.type';
 import ItemCard from './ItemCard';
 
@@ -13,12 +13,7 @@ function ItemsList({ products }: Props) {
       showsVerticalScrollIndicator={false}
       numColumns={2}
       renderItem={({ item }) => (
-        <ItemCard
-          sku={item.sku}
-          name={item.name}
-          uri={item.photoUrl}
-          key={item.sku}
-        />
+        <ItemCard sku={item.sku} name={item.name} uri={item.photoUri} />
       )}
       keyExtractor={(item) => item.sku}
     />

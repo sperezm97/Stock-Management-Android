@@ -3,20 +3,20 @@ export type Product = {
   categoryId: number;
   name: string;
   description?: string;
-  photoUrl?: string;
+  photoUri?: string;
   alertQuantity: number;
   sellingPrice?: number;
-  marginProfitability?: number;
+  quantity: number;
   units: number;
 };
 
 export enum PRODUCTS_ACTION_TYPES {
-  GET_PRODUCTS = "PRODUCTS_ACTION_TYPES/GET_PRODUCTS",
-  GET_PRODUCT = "PRODUCTS_ACTION_TYPES/GET_PRODUCT",
-  ADD_PRODUCT = "PRODUCTS_ACTION_TYPES/ADD_PRODUCT",
-  UPDATE_PRODUCT = "PRODUCTS_ACTION_TYPES/UPDATE_PRODUCT",
-  DELETE_PRODUCT = "PRODUCTS_ACTION_TYPES/DELETE_PRODUCT",
-  GET_PRODUCTS_BY_CATEGORY = "PRODUCTS_ACTION_TYPE/GET_PRODUCTS_BY_CATEGORY",
+  GET_PRODUCTS = 'PRODUCTS_ACTION_TYPES/GET_PRODUCTS',
+  GET_PRODUCT = 'PRODUCTS_ACTION_TYPES/GET_PRODUCT',
+  ADD_PRODUCT = 'PRODUCTS_ACTION_TYPES/ADD_PRODUCT',
+  UPDATE_PRODUCT = 'PRODUCTS_ACTION_TYPES/UPDATE_PRODUCT',
+  DELETE_PRODUCT = 'PRODUCTS_ACTION_TYPES/DELETE_PRODUCT',
+  GET_PRODUCTS_BY_CATEGORY = 'PRODUCTS_ACTION_TYPE/GET_PRODUCTS_BY_CATEGORY',
 }
 
 export type ProductState = Product[];
@@ -53,16 +53,16 @@ export type DeleteProductAction = {
 };
 
 export type ProductsListAction =
-  | { type: "PRODUCTS_ACTION_TYPES/GET_PRODUCTS"; payload: Product[] }
-  | { type: "PRODUCTS_ACTION_TYPES/GET_PRODUCT"; payload: Product }
-  | { type: "PRODUCTS_ACTION_TYPES/ADD_PRODUCT"; payload: Product }
+  | { type: 'PRODUCTS_ACTION_TYPES/GET_PRODUCTS'; payload: Product[] }
+  | { type: 'PRODUCTS_ACTION_TYPES/GET_PRODUCT'; payload: Product }
+  | { type: 'PRODUCTS_ACTION_TYPES/ADD_PRODUCT'; payload: Product }
   | {
-      type: "PRODUCTS_ACTION_TYPES/UPDATE_PRODUCT";
+      type: 'PRODUCTS_ACTION_TYPES/UPDATE_PRODUCT';
       payload: Product;
       sku: string;
     }
   | {
-      type: "PRODUCTS_ACTION_TYPE/GET_PRODUCTS_BY_CATEGORY";
+      type: 'PRODUCTS_ACTION_TYPE/GET_PRODUCTS_BY_CATEGORY';
       payload: Product[];
     }
-  | { type: "PRODUCTS_ACTION_TYPES/DELETE_PRODUCT"; payload: string };
+  | { type: 'PRODUCTS_ACTION_TYPES/DELETE_PRODUCT'; payload: string };
