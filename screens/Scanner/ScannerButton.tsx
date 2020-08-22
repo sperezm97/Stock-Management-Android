@@ -18,6 +18,26 @@ interface PropStyles {
   imageContainer: ImageStyle;
 }
 
+const styles = StyleSheet.create<PropStyles>({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  image: {
+    width: 223,
+    height: 223,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+  },
+  imageContainer: {
+    width: '100%',
+    height: 500,
+    transform: [{ translateX: -100 }],
+  },
+});
+
 function ScannerButton() {
   const handleScan = () => {
     <BarCode />;
@@ -38,23 +58,3 @@ function ScannerButton() {
 }
 
 export default ScannerButton;
-
-const styles = StyleSheet.create<PropStyles>({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  image: {
-    width: 223,
-    height: 223,
-    borderRadius: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
-  },
-  imageContainer: {
-    width: '100%',
-    height: 500,
-    transform: [{ translateX: -100 }],
-  },
-});
