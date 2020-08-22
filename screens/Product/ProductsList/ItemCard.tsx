@@ -3,10 +3,7 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import { images, Theme } from '../../../constants';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-import {
-  ProductsScreenNavigationProp,
-  ProductDetailsScreenNavigationProp,
-} from '../../../types';
+import { ProductDetailsScreenNavigationProp } from '../../../types';
 
 interface Props {
   name: string;

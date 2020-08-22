@@ -46,7 +46,7 @@ export default function BarCode() {
     <View
       style={{
         flex: 1,
-        height: Dimensions.get('screen').height,
+        height: '100%',
         justifyContent: 'center',
         backgroundColor: 'black',
       }}>
@@ -54,7 +54,7 @@ export default function BarCode() {
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
           style={{
-            height: Dimensions.get('screen').height,
+            height: '100%',
             width: '100%',
           }}
         />

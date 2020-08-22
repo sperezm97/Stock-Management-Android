@@ -9,21 +9,17 @@ export type RootStackParamList = {
     sku: string;
   };
   CameraScreen: undefined;
+  AddProductScreen: undefined;
 };
 
 export type BottomTabParamList = {
-  TabOne: undefined;
   Scanner: undefined;
   Products: undefined;
   Categories: undefined;
-  AddProduct: undefined;
 };
 
 export type ProductsParamList = {
   ProductsListScreen: undefined;
-};
-export type TabOneParamList = {
-  TabOneScreen: undefined;
 };
 export type ScannerScreenParamList = {
   Scanner: undefined;
@@ -39,24 +35,24 @@ export type AddProductParamList = {
 };
 // Type Checking param List
 
-export type AppStackParamList = {
-  Products: undefined;
-  Profile: undefined;
-  Shopping: undefined;
-  Root: undefined;
-  Details: {
-    id: string;
-  };
-  PlaceOrder: undefined;
-  StatusOrder: {
-    action: 'success' | 'failure';
-  };
-  Order: undefined;
-  AddressList: undefined;
-  AddressCreate: undefined;
-  PaymentCreate: undefined;
-  PaymentList: undefined;
-};
+// export type AppStackParamList = {
+//   Products: undefined;
+//   Profile: undefined;
+//   Shopping: undefined;
+//   Root: undefined;
+//   Details: {
+//     id: string;
+//   };
+//   PlaceOrder: undefined;
+//   StatusOrder: {
+//     action: 'success' | 'failure';
+//   };
+//   Order: undefined;
+//   AddressList: undefined;
+//   AddressCreate: undefined;
+//   PaymentCreate: undefined;
+//   PaymentList: undefined;
+// };
 
 // Type Checking Screens
 
@@ -68,6 +64,10 @@ type ProductsScreenStackProp = StackScreenProps<
 type ProductDetailsScreenStackProp = StackScreenProps<
   RootStackParamList,
   'ProductDetailsScreen'
+>;
+type AddProductScreenStackProp = StackScreenProps<
+  RootStackParamList,
+  'AddProductScreen'
 >;
 
 // Route
@@ -84,8 +84,8 @@ export type RootScreenRouteProp = RouteProp<RootStackParamList, 'Root'>;
 
 // Bottom tab navigation props
 type ProductsBottomTabNavigationProp = BottomTabNavigationProp<
-  ProductsParamList,
-  'ProductsListScreen'
+  BottomTabParamList,
+  'Products'
 >;
 export type RootBottomTabNavigationProp = BottomTabNavigationProp<
   RootStackParamList,

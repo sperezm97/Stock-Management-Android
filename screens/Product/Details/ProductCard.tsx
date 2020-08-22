@@ -59,7 +59,7 @@ function ProductCard(props: Props) {
             setSelectedField={setSelectedField}
           />
           <Input
-            label="Unidades"
+            label="Unidades por Paquete"
             value={values.units}
             onChangeText={handleChange('units')}
             onBlur={handleBlur('units')}

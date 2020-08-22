@@ -74,7 +74,7 @@ function ProductForm(props: Props) {
             setSelectedField={setSelectedField}
           />
           <Input
-            label="Unidades"
+            label="Unidades por Paquete"
             value={values.units.toString()}
             onChangeText={handleChange('units')}
             onBlur={handleBlur('units')}

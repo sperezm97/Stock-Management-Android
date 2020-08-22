@@ -27,7 +27,7 @@ function CategoriesScreen() {
     }
   };
   const onPress = (id: number) => {
-    navigation.navigate('ProductsListScreen');
+    navigation.navigate('Products');
   };
   return (
     <WithLoading isLoading={loading}>
