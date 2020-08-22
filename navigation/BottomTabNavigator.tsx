@@ -13,7 +13,7 @@ import CategoriesNavigator from './CategoriesNavigator';
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 const tabBarOption: BottomTabBarOptions = {
-  activeTintColor: Theme.colors.dark.tint,
+  activeTintColor: Theme.colors.primary,
   allowFontScaling: true,
   labelStyle: {
     fontSize: 13,
