@@ -18,7 +18,7 @@ export default function RootNavigator() {
         initialParams={{ sku: '' }}
       />
       <Stack.Screen name="CameraScreen" component={CameraNavigator} />
-      <Stack.Screen component={AddProductNavigator} name="AddProductScreen" />
+      <Stack.Screen name="AddProductScreen" component={AddProductNavigator} />
     </Stack.Navigator>
   );
 }

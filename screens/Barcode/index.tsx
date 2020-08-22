@@ -7,9 +7,9 @@ import {
   BarCodeEvent,
 } from 'expo-barcode-scanner';
 import { useNavigation } from '@react-navigation/native';
-import { ProductDetailsScreenNavigationProp } from '../../../types';
+import { ProductDetailsScreenNavigationProp } from '../../types';
 import ScannerContent from './ScannerContent';
-import { Theme } from '../../../constants';
+import { Theme } from '../../constants';
 
 interface BarCodeProps {
   type: BarCodeScanner;

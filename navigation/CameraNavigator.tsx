@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { CameraScreenParamList } from '../types';
-import BarCode from '../screens/Scanner/Barcode';
+import BarCode from '../screens/Barcode';
 import CameraHeader from '../components/CameraHeader';
 
 const CameraScreenStack = createStackNavigator<CameraScreenParamList>();
