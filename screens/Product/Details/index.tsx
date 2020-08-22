@@ -10,7 +10,7 @@ import WithLoading from '../../../hooks/hoc/WithLoader';
 import ProductCard from './ProductCard';
 import styles from './styles';
 import { images } from '../../../constants';
-import { useNavigation, useRoute, Route } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 import { ProductDetailsScreenRouteProp } from '../../../types';
 
 function ProductDetailsScreen() {
@@ -19,10 +19,10 @@ function ProductDetailsScreen() {
     categoryId: 0,
     name: '',
     description: '',
-    photoUrl: '',
-    alertQuantity: 0,
+    photoUri: '',
+    quantity: 0,
     sellingPrice: 0,
-    marginProfitability: 0,
+    alertQuantity: 0,
     units: 0,
   });
   const [category, setCategory] = useState<Category>({
@@ -58,6 +58,7 @@ function ProductDetailsScreen() {
   const handleEditing = () => {
     const updateEdit = (prev: boolean) => !prev;
     setEditing(updateEdit);
+    console.log(product.photoUri);
   };
 
   function onSubmit(editProduct: Product) {
@@ -70,26 +71,19 @@ function ProductDetailsScreen() {
       <View style={styles.header}>
         <Header handleEditing={handleEditing} />
       </View>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ flex: 1 }}>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <WithLoading isLoading={loading}>
           <View style={styles.container}>
             <ImageBackground source={images.headerShape} style={styles.image} />
-            <View style={{ top: '15%', alignItems: 'center' }}>
+            <View style={{ top: 90, alignItems: 'center', width: '80%' }}>
               <View style={styles.photoContainer}>
-                <PhotoContainer />
+                <PhotoContainer uri={product.photoUri} />
               </View>
               <ProductCard
                 defaultValue={{ product, category }}
                 onSubmit={onSubmit}
                 isEditable={editing}
               />
-              {/* {
-                <View
-                  style={{ paddingVertical: 190, backgroundColor: 'black' }}
-                />
-              } */}
             </View>
           </View>
         </WithLoading>

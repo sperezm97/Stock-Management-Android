@@ -4,20 +4,24 @@ import { Theme } from '../../../constants';
 interface Styles {
   container: ViewStyle;
   header: ViewStyle;
+  content: ViewStyle;
 }
 
 export default StyleSheet.create<Styles>({
   container: {
     flex: 1,
+    width: Dimensions.get('screen').width,
+    height: Dimensions.get('screen').height,
+    backgroundColor: Theme.colors.white,
   },
   header: {
-    justifyContent: 'center',
-    // height: 110,
-    // alignItems: 'flex-start',
+    alignItems: 'center',
     backgroundColor: '#FFF',
-    // elevation: 2,
     flexDirection: 'column',
-    // paddingTop: 10,
-    // paddingLeft: 20,
+    elevation: 1,
+  },
+  content: {
+    alignItems: 'center',
+    height: '82%',
   },
 });

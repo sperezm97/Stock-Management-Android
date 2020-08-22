@@ -1,140 +1,144 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
 import { Product } from '../../../state/types/product.type';
 import { Category } from '../../../state/types/category.type';
 import { Theme } from '../../../constants';
 import { Formik } from 'formik';
 import Input from '../../../components/Input';
+import CurryImagePicker from '../../../components/CurryImagePicker';
+import { Picker } from '@react-native-community/picker';
 
 interface Props {
-  onSubmit: (values: any) => void;
+  onSubmit: (
+    productData: Product,
+    selectedCategory: number | string,
+    photoUri: string,
+  ) => void;
   defaultValue: {
-    product: Product;
-    category: Category;
+    categories: Category[];
   };
-  isEditable: boolean;
 }
-const initialValues = {
+const initialValues: Product = {
   name: '',
   description: '',
   sku: '',
-  units: '',
-  alertQuantity: '',
-  quantity: '',
-  category: '',
-  sellingPrice: '',
+  units: 0,
+  quantity: 0,
+  categoryId: 0,
+  sellingPrice: 0,
+  alertQuantity: 0,
 };
 
-function ProductCard(props: Props) {
+function ProductForm(props: Props) {
+  const [selectedCategory, setSelectedCategory] = useState<{
+    id: string | number;
+  }>({ id: 0 });
+  const [productImage, setProductImage] = useState('');
   const [selectedField, setSelectedField] = useState({
     label: '',
   });
-  const { onSubmit, isEditable, defaultValue } = props;
+  const { onSubmit, defaultValue } = props;
 
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={() =>
+        onSubmit(initialValues, selectedCategory.id, productImage)
+      }>
       {({ values, handleBlur, handleChange }) => (
         <View style={styles.content}>
-          <View>
-            <Text style={styles.productName}>{defaultValue.product.name}</Text>
+          <View style={{ alignItems: 'center', marginBottom: 20 }}>
+            <CurryImagePicker setProductImage={setProductImage} />
           </View>
           <Input
+            label="Nombre del producto"
+            onChangeText={handleChange('name')}
+            onBlur={handleBlur('name')}
+            selectedField={selectedField}
+            setSelectedField={setSelectedField}
+          />
+          <Input
             label="Codigo de Barra"
-            value={defaultValue.product.sku}
             onChangeText={handleChange('sku')}
             onBlur={handleBlur('sku')}
-            editable={false}
             selectedField={selectedField}
             setSelectedField={setSelectedField}
           />
           <Input
             multiline={true}
-            label="Descripcion"
+            label="Description"
             value={values.description}
             onChangeText={handleChange('description')}
             onBlur={handleBlur('description')}
-            placeholder={defaultValue.product.description}
-            editable={isEditable}
             selectedField={selectedField}
             setSelectedField={setSelectedField}
           />
           <Input
             label="Unidades"
-            value={values.units}
+            value={values.units.toString()}
             onChangeText={handleChange('units')}
             onBlur={handleBlur('units')}
-            placeholder={defaultValue.product.units.toString()}
-            editable={isEditable}
             keyboardType="number-pad"
             selectedField={selectedField}
             setSelectedField={setSelectedField}
           />
-          <Input
-            label="Categoria"
-            value={values.category}
-            onChangeText={handleChange('category')}
-            onBlur={handleBlur('category')}
-            placeholder={defaultValue.category.name}
-            editable={isEditable}
-            selectedField={selectedField}
-            setSelectedField={setSelectedField}
-          />
+          <Picker
+            selectedValue={selectedCategory.id}
+            style={{ height: 50, color: Theme.colors.gray }}
+            onValueChange={(itemValue) =>
+              setSelectedCategory({ id: itemValue })
+            }>
+            {defaultValue.categories.map((category) => (
+              <Picker.Item
+                label={category.name}
+                value={category.id}
+                key={category.id}
+              />
+            ))}
+          </Picker>
           <Input
             label="Cantidad"
-            value={values.quantity}
+            value={values.quantity.toString()}
             onChangeText={handleChange('quantity')}
             onBlur={handleBlur('quantity')}
-            placeholder={
-              defaultValue.product.quantity
-                ? defaultValue.product.quantity.toString()
-                : '0'
-            }
-            editable={isEditable}
-            keyboardType="number-pad"
-            selectedField={selectedField}
-            setSelectedField={setSelectedField}
-          />
-          <Input
-            label="Precio de Venta"
-            value={values.sellingPrice}
-            onChangeText={handleChange('sellingPrice')}
-            onBlur={handleBlur('sellingPrice')}
-            placeholder={
-              defaultValue.product.sellingPrice
-                ? defaultValue.product.sellingPrice.toString()
-                : '0'
-            }
-            editable={isEditable}
             keyboardType="number-pad"
             selectedField={selectedField}
             setSelectedField={setSelectedField}
           />
           <Input
             label="Alerta de Cantidad"
-            value={values.quantity}
-            onChangeText={handleChange('alertQuantity')}
-            onBlur={handleBlur('alertQuantity')}
-            placeholder={
-              defaultValue.product.alertQuantity
-                ? defaultValue.product.alertQuantity.toString()
+            value={
+              values.alertQuantity !== undefined
+                ? values.alertQuantity.toString()
                 : '0'
             }
-            editable={isEditable}
+            onChangeText={handleChange('alertQuantity')}
+            onBlur={handleBlur('alertQuantity')}
             keyboardType="number-pad"
             selectedField={selectedField}
             setSelectedField={setSelectedField}
           />
+          <View style={{ paddingTop: 20 }}>
+            <Button
+              title="submit"
+              color={Theme.colors.primary}
+              onPress={() =>
+                onSubmit(values, selectedCategory.id, productImage)
+              }
+            />
+          </View>
         </View>
       )}
     </Formik>
   );
 }
 
-export default ProductCard;
+export default ProductForm;
 
 const styles = StyleSheet.create({
   content: {
-    minWidth: '100%',
+    minWidth: '85%',
+    paddingVertical: 20,
   },
   productName: {
     fontSize: 30,

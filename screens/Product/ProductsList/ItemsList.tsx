@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, Dimensions } from 'react-native';
 import { Product } from '../../../state/types/product.type';
 import ItemCard from './ItemCard';
 
@@ -16,8 +16,8 @@ function ItemsList({ products }: Props) {
         <ItemCard
           sku={item.sku}
           name={item.name}
-          uri={item.photoUrl}
-          key={item.sku}
+          uri={item.photoUri}
+          quantity={item.quantity}
         />
       )}
       keyExtractor={(item) => item.sku}

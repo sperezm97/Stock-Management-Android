@@ -1,15 +1,32 @@
 import { Product } from '../state/types/product.type';
 import axios from 'axios';
+import { uploadImage } from './uploadImage';
 
 // const url = "https://localhost:5001/api/products";
-const url = 'https://stockmanagement2018.azurewebsites.net/api/products';
+const url = 'https://stockmanagement2017.azurewebsites.net/api/products';
 const headers = {
   headers: {
     'content-type': 'application/json',
     Accept: 'application/json',
   },
 };
-const getProducts = () => axios.get<Product[]>(url);
+const getProducts = (query?: string) => {
+  if (typeof query === 'string') {
+    let productsUrl = `${url}?search=${query}`;
+    return axios.get<Product[]>(productsUrl);
+  }
+  return axios.get<Product[]>(url);
+};
+
+const getProductsByCategory = async (categoryId: number, query?: string) => {
+  let productsUrl = `${url}?category_id=${categoryId}`;
+
+  if (typeof query === 'string') {
+    productsUrl = `${url}?category_id=${categoryId}&search=${query}`;
+    return await axios.get<Product[]>(productsUrl);
+  }
+  return await axios.get<Product[]>(productsUrl);
+};
 
 const getProduct = async (sku: string) => {
   let productUrl = `${url}/${sku}`;
@@ -17,13 +34,25 @@ const getProduct = async (sku: string) => {
   return product.data;
 };
 
-const getProductsByCategory = async (categoryId: number) => {
-  let productsUrl = `${url}/${categoryId}`;
-  const products = await axios.get<Product[]>(productsUrl);
-  return products.data;
-};
-
-const addProduct = async (product: Product) => {
+const addProduct = async (product: Product, photoUri?: string) => {
+  // const addedProduct: Product =
+  //   typeof photoUri === 'string'
+  //     ? {
+  //         sku: product.sku,
+  //         categoryId: product.categoryId,
+  //         name: product.name,
+  //         description: product.description,
+  //         photoUri: photoUri,
+  //         alertQuantity: product.alertQuantity,
+  //         sellingPrice: product.sellingPrice,
+  //         quantity: product.quantity,
+  //         units: product.units,
+  //       }
+  //     : { ...product };
+  if (typeof photoUri === 'string') {
+    const newPhoto = await uploadImage(photoUri);
+    product.photoUri = newPhoto;
+  }
   try {
     const newProduct = (await axios.post<Product>(url, product, headers)).data;
     return newProduct;

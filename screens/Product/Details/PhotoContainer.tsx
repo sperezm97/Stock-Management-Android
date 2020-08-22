@@ -3,21 +3,21 @@ import { View, StyleSheet, ImageBackground, Image } from 'react-native';
 import { Theme, images } from '../../../constants';
 
 interface Props {
-  uri?: string | undefined;
+  uri: string | undefined;
 }
 
-function PhotoContainer({ uri }: Props) {
+function PhotoContainer(props: Props) {
+  const { uri } = props;
   function imageHandler() {
-    if (typeof uri === 'string') {
+    if (typeof uri == 'string') {
       return <Image source={{ uri: uri }} style={styles.image} />;
-    } else {
-      return (
-        <Image
-          style={{ width: 80, height: 80, resizeMode: 'contain' }}
-          source={images.noImage}
-        />
-      );
     }
+    return (
+      <Image
+        style={{ width: 80, height: 80, resizeMode: 'contain' }}
+        source={images.noImage}
+      />
+    );
   }
   return (
     <View style={styles.container}>
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   image: {
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     width: 145,
     height: 145,
     borderRadius: 100,

@@ -7,7 +7,7 @@ import SearchBox from './SearchBox';
 import WithLoading from '../../../hooks/hoc/WithLoader';
 import { Category } from '../../../state/types/category.type';
 import { CategoryServices } from '../../../services/categoryService';
-import CategoriesList from './CategoriesList';
+import { CategoriesList } from './Categories/';
 import styles from './styles';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -49,23 +49,33 @@ const ProductsListScreen = () => {
         setFilteredProducts([...products]);
       } else {
         setFilteredProducts([...newProducts]);
-        console.log(filteredProducts);
       }
     }, 1000);
   };
+  const setProductsByCategory = async (id: number) => {
+    const {
+      data: listOfProducts,
+    } = await ProductServices.getProductsByCategory(id);
+    console.log(listOfProducts);
+    setProducts(listOfProducts);
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
+      <SafeAreaView style={styles.header}>
         <SearchBox
           valueInput={valueInput}
           setValueInput={setValueInput}
           newProducts={handleSearchInput}
         />
         <>
-          <CategoriesList categories={categories} />
+          <CategoriesList
+            categories={categories}
+            setProductsByCategory={setProductsByCategory}
+          />
         </>
-      </View>
-      <View>
+      </SafeAreaView>
+      <View style={styles.content}>
         <WithLoading isLoading={loading}>
           <ItemsList products={filteredProducts} />
         </WithLoading>

@@ -5,11 +5,15 @@ import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
 export type RootStackParamList = {
   Root: undefined;
   NotFound: undefined;
+  ProductDetailsScreen: {
+    sku: string;
+  };
+  CameraScreen: undefined;
 };
 
 export type BottomTabParamList = {
   TabOne: undefined;
-  TabTwo: undefined;
+  Scanner: undefined;
   Products: undefined;
   Categories: undefined;
   AddProduct: undefined;
@@ -17,15 +21,15 @@ export type BottomTabParamList = {
 
 export type ProductsParamList = {
   ProductsListScreen: undefined;
-  ProductDetailsScreen: {
-    sku: string;
-  };
 };
 export type TabOneParamList = {
   TabOneScreen: undefined;
 };
-export type TabTwoParamList = {
-  TabTwoScreen: undefined;
+export type ScannerScreenParamList = {
+  Scanner: undefined;
+};
+export type CameraScreenParamList = {
+  CameraScreen: undefined;
 };
 export type CategoriesParamList = {
   CategoriesScreen: undefined;
@@ -62,28 +66,28 @@ type ProductsScreenStackProp = StackScreenProps<
   'ProductsListScreen'
 >;
 type ProductDetailsScreenStackProp = StackScreenProps<
-  ProductsParamList,
+  RootStackParamList,
   'ProductDetailsScreen'
 >;
 
 // Route
-type ProductsScreenRouteProp = RouteProp<
+export type ProductsScreenRouteProp = RouteProp<
   ProductsParamList,
   'ProductsListScreen'
 >;
 export type ProductDetailsScreenRouteProp = RouteProp<
-  ProductsParamList,
+  RootStackParamList,
   'ProductDetailsScreen'
 >;
 
-type RootScreenRouteProp = RouteProp<RootStackParamList, 'Root'>;
+export type RootScreenRouteProp = RouteProp<RootStackParamList, 'Root'>;
 
 // Bottom tab navigation props
 type ProductsBottomTabNavigationProp = BottomTabNavigationProp<
   ProductsParamList,
   'ProductsListScreen'
 >;
-type RootBottomTabNavigationProp = BottomTabNavigationProp<
+export type RootBottomTabNavigationProp = BottomTabNavigationProp<
   RootStackParamList,
   'Root'
 >;
@@ -92,6 +96,11 @@ type RootBottomTabNavigationProp = BottomTabNavigationProp<
 export type ProductsScreenNavigationProp = CompositeNavigationProp<
   ProductsBottomTabNavigationProp,
   StackNavigationProp<ProductsParamList>
+>;
+
+export type ProductDetailsScreenNavigationProp = CompositeNavigationProp<
+  RootBottomTabNavigationProp,
+  StackNavigationProp<RootStackParamList>
 >;
 export type StackProps = StackNavigationProp<RootStackParamList>;
 export type BottomTabProps =

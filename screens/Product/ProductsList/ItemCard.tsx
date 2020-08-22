@@ -3,15 +3,19 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import { images, Theme } from '../../../constants';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-import { ProductsScreenNavigationProp } from '../../../types';
+import {
+  ProductsScreenNavigationProp,
+  ProductDetailsScreenNavigationProp,
+} from '../../../types';
 
 interface Props {
   name: string;
   sku: string;
   uri?: string;
+  quantity: number;
 }
-function ItemCard({ name, sku, uri }: Props) {
-  const navigation = useNavigation<ProductsScreenNavigationProp>();
+function ItemCard({ name, sku, uri, quantity }: Props) {
+  const navigation = useNavigation<ProductDetailsScreenNavigationProp>();
   function imageHandler() {
     if (typeof uri === 'string') {
       return <Image source={{ uri: uri }} style={styles.image} />;
@@ -31,7 +35,10 @@ function ItemCard({ name, sku, uri }: Props) {
         <View style={styles.imageContainer}>{imageHandler()}</View>
         <View style={styles.textContainer}>
           <Text style={styles.name}>{name}</Text>
-          <Text style={styles.caption}>{sku}</Text>
+          <View style={styles.inLine}>
+            <Text style={styles.caption}>{sku}</Text>
+            <Text style={styles.caption}>{quantity}</Text>
+          </View>
         </View>
       </View>
     </TouchableOpacity>
@@ -43,7 +50,7 @@ export default ItemCard;
 const styles = StyleSheet.create({
   container: {
     width: 150,
-    minHeight: 150,
+    height: 180,
     borderRadius: 8,
     borderWidth: 0.5,
     borderColor: '#E5E5E5',
@@ -55,13 +62,15 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   image: {
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     width: '100%',
     height: '100%',
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
   },
   imageContainer: {
     width: '100%',
-    height: 102,
+    height: 100,
     backgroundColor: '#FFF',
     justifyContent: 'center',
     alignItems: 'center',
@@ -83,5 +92,14 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     marginTop: 5,
     paddingHorizontal: 10,
+    alignSelf: 'flex-start',
+    height: '40%',
+    width: '100%',
+    justifyContent: 'space-between',
+  },
+  inLine: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
   },
 });

@@ -27,7 +27,7 @@ const Header = ({ handleEditing }: Props) => {
         style={{
           width: '100%',
           height: 70,
-          position: 'absolute',
+          // position: 'absolute',
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -38,6 +38,7 @@ const Header = ({ handleEditing }: Props) => {
             width: 2,
             height: 3,
           },
+          paddingTop: 15,
         }}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <MaterialIcons
