@@ -1,27 +1,27 @@
-const tintColorLight = "#0099FF";
-const tintColorDark = "#fff";
+const tintColorLight = '#0099FF';
+const tintColorDark = '#fff';
 
 const colors = {
   light: {
-    text: "#000",
-    background: "#fff",
+    text: '#000',
+    background: '#fff',
     tint: tintColorLight,
-    tabIconDefault: "#ccc",
+    tabIconDefault: '#ccc',
     tabIconSelected: tintColorLight,
   },
   dark: {
-    text: "#fff",
-    background: "#363636",
+    text: '#fff',
+    background: '#363636',
     tint: tintColorDark,
-    tabIconDefault: "#ccc",
+    tabIconDefault: '#ccc',
     tabIconSelected: tintColorDark,
   },
-  primary: "#26A8FF",
-  secondary: "#0099FF",
-  gray: "#707070",
-  white: "#FBFBFB",
-  blue: "#104BD6",
-  text: "#363636",
+  primary: '#26A8FF',
+  secondary: '#0099FF',
+  gray: '#707070',
+  white: '#FBFBFB',
+  blue: '#104BD6',
+  text: '#363636',
 };
 
 const sizes = {
@@ -45,6 +45,7 @@ const fonts = {
   },
   h2: {
     fontSize: sizes.h2,
+    color: colors.white,
   },
   header: {
     fontSize: sizes.h1,

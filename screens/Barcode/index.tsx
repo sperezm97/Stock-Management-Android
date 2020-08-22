@@ -1,20 +1,51 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button, Dimensions } from 'react-native';
 import {
-  BarCodeScanner,
-  BarCodeScannedCallback,
-  BarCodeEventCallbackArguments,
-  BarCodeEvent,
-} from 'expo-barcode-scanner';
+  Text,
+  View,
+  StyleSheet,
+  Button,
+  Dimensions,
+  ViewStyle,
+} from 'react-native';
+import { BarCodeScanner, BarCodeEvent } from 'expo-barcode-scanner';
 import { useNavigation } from '@react-navigation/native';
 import { ProductDetailsScreenNavigationProp } from '../../types';
-import ScannerContent from './ScannerContent';
 import { Theme } from '../../constants';
+import HeaderBarcode from './HeaderBarcode';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { MaterialIcons } from '@expo/vector-icons';
 
-interface BarCodeProps {
-  type: BarCodeScanner;
-  data: string;
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
+
+interface Styles {
+  container: ViewStyle;
+  scanner: ViewStyle;
+  content: ViewStyle;
+  box: ViewStyle;
 }
+
+const styles = StyleSheet.create<Styles>({
+  container: {
+    flex: 1,
+  },
+  scanner: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  content: {
+    flex: 1,
+  },
+  box: {
+    height: height * 0.45,
+    width: width * 0.7,
+    borderWidth: 5,
+    borderColor: 'white',
+    borderRadius: 10,
+  },
+});
+
 export default function BarCode() {
   const [hasPermission, setHasPermission] = useState<boolean | undefined>(
     undefined,
@@ -27,56 +58,42 @@ export default function BarCode() {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === 'granted');
     })();
+    return () => {
+      setScanned(false);
+    };
   }, []);
 
   const handleBarCodeScanned = ({ type, data }: BarCodeEvent) => {
     setScanned(true);
-    // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-    navigation.navigate('ProductDetailsScreen', { sku: data });
+    if (scanned) {
+      navigation.navigate('ProductDetailsScreen', { sku: data });
+    }
   };
 
-  if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
-  }
-  if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+  function back() {
+    navigation.goBack();
   }
 
   return (
-    <View
-      style={{
-        flex: 1,
-        height: '100%',
-        justifyContent: 'center',
-        backgroundColor: 'black',
-      }}>
-      <View style={{ position: 'absolute', height: '100%', width: '100%' }}>
-        <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={{
-            height: '100%',
-            width: '100%',
-          }}
-        />
-      </View>
-      <View
-        style={{
-          justifyContent: 'space-around',
-          flexDirection: 'column',
-          alignItems: 'center',
-          flex: 1,
-        }}>
-        <ScannerContent />
-
-        {scanned && (
-          <View style={{ padding: 10, top: 50 }}>
-            <Button
-              color={Theme.colors.primary}
-              title={'Presiona para escanear de nuevo'}
-              onPress={() => setScanned(false)}
+    <View style={styles.container}>
+      <HeaderBarcode
+        left={
+          <TouchableOpacity onPress={back}>
+            <MaterialIcons
+              size={28}
+              color={Theme.colors.light.background}
+              name="arrow-back"
             />
-          </View>
-        )}
+          </TouchableOpacity>
+        }>
+        Prueba
+      </HeaderBarcode>
+      <View style={styles.content}>
+        <BarCodeScanner
+          onBarCodeScanned={handleBarCodeScanned}
+          style={styles.scanner}>
+          <View style={styles.box} />
+        </BarCodeScanner>
       </View>
     </View>
   );
