@@ -21,6 +21,7 @@ function ItemsList({ products }: Props) {
         />
       )}
       keyExtractor={(item) => item.sku}
+      // contentContainerStyle={{ width: '100%' }}
     />
   );
 }

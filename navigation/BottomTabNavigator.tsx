@@ -1,27 +1,16 @@
-import { MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 
 import { Theme } from '../constants/';
 import useColorScheme from '../hooks/useColorScheme';
-import TabOneScreen from '../screens/TabOneScreen';
 import {
   BottomTabParamList,
-  TabOneParamList,
   ScannerScreenParamList,
-  ProductsParamList,
   CategoriesParamList,
-  AddProductParamList,
 } from '../types';
-import ProductDetailsScreen from '../screens/Product/Details';
-import ProductsListScreen from '../screens/Product/ProductsList';
 import CategoriesScreen from '../screens/Category';
-import AddProductScreen from '../screens/Product/AddProduct';
-import { View } from '../components/Themed';
-import { Button } from 'react-native';
 import TabBarIcon from '../components/TabBarIcon';
-import AddButton from '../components/AddButton';
 import ProductsListNavigator from './ProductsListNavigator';
 import ScannerScreen from '../screens/Scanner/ScannerScreen';
 
@@ -32,7 +21,7 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Products"
       tabBarOptions={{
         activeTintColor: Theme.colors[colorScheme].tint,
         allowFontScaling: true,
@@ -55,27 +44,6 @@ export default function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        component={TabOneNavigator}
-        name="TabOne"
-        options={{
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="book" color={color} size={18} />
-          ),
-        }}
-      />
-      <BottomTab.Screen
-        component={AddProductNavigator}
-        name="AddProduct"
-        options={{
-          tabBarIcon: ({ color }) => (
-            <View style={{ bottom: 5, borderRadius: 36 }}>
-              <TabBarIcon name="add-circle" color={color} size={50} />
-            </View>
-          ),
-          tabBarLabel: () => <View style={{ position: 'absolute' }}></View>,
-        }}
-      />
-      <BottomTab.Screen
         name="Scanner"
         component={TabTwoNavigator}
         options={{
@@ -85,7 +53,15 @@ export default function BottomTabNavigator() {
           ),
         }}
       />
-      <BottomTab.Screen name="Categories" component={CategoriesNavigator} />
+      <BottomTab.Screen
+        name="Categories"
+        component={CategoriesNavigator}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="label" color={color} size={18} />
+          ),
+        }}
+      />
     </BottomTab.Navigator>
   );
 }
@@ -95,27 +71,6 @@ export default function BottomTabNavigator() {
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const TabOneStack = createStackNavigator<TabOneParamList>();
-
-function TabOneNavigator() {
-  return (
-    <TabOneStack.Navigator>
-      <TabOneStack.Screen
-        name="TabOneScreen"
-        component={TabOneScreen}
-        options={{
-          headerTitle: 'Details',
-          headerTitleStyle: {
-            fontSize: Theme.fonts.h1.fontSize,
-            color: Theme.colors.gray,
-            fontFamily: 'segoe-ui-bold',
-          },
-          headerTitleAlign: 'center',
-        }}
-      />
-    </TabOneStack.Navigator>
-  );
-}
 
 const TabTwoStack = createStackNavigator<ScannerScreenParamList>();
 
@@ -157,14 +112,5 @@ function CategoriesNavigator() {
         }}
       />
     </CategoriesStack.Navigator>
-  );
-}
-
-const AddProductStack = createStackNavigator<AddProductParamList>();
-function AddProductNavigator() {
-  return (
-    <AddProductStack.Navigator>
-      <AddProductStack.Screen name="AddProduct" component={AddProductScreen} />
-    </AddProductStack.Navigator>
   );
 }

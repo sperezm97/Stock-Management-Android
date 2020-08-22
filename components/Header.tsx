@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Dimensions,
   SafeAreaView,
+  StatusBar,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { ProductsScreenNavigationProp } from '../types';
@@ -40,6 +41,7 @@ const Header = ({ handleEditing }: Props) => {
           },
           paddingTop: 15,
         }}>
+        <StatusBar barStyle="light-content" />
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <MaterialIcons
             style={{ alignSelf: 'flex-start' }}

@@ -8,7 +8,7 @@ import styles from './styles';
 import { ScrollView } from 'react-native-gesture-handler';
 import { ProductServices } from '../../../services/productService';
 
-export default function index() {
+export default function AddProductScreen() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {

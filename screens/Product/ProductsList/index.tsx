@@ -10,6 +10,9 @@ import { CategoryServices } from '../../../services/categoryService';
 import { CategoriesList } from './Categories/';
 import styles from './styles';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import { RootBottomTabNavigationProp } from '../../../types';
+import GoToAddProducts from './GoToAddProducts';
 
 const ProductsListScreen = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -18,6 +21,7 @@ const ProductsListScreen = () => {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [valueInput, setValueInput] = useState('');
 
+  const navigation = useNavigation<RootBottomTabNavigationProp>();
   useEffect(() => {
     fetchProducts();
   }, [clearTimeout()]);
@@ -38,6 +42,7 @@ const ProductsListScreen = () => {
       setLoading(false);
     }
   };
+
   const handleSearchInput = (name: string) => {
     console.log(name);
     let text = name.toLowerCase().trim();
@@ -56,7 +61,6 @@ const ProductsListScreen = () => {
     const {
       data: listOfProducts,
     } = await ProductServices.getProductsByCategory(id);
-    console.log(listOfProducts);
     setProducts(listOfProducts);
   };
 
@@ -78,6 +82,7 @@ const ProductsListScreen = () => {
       <View style={styles.content}>
         <WithLoading isLoading={loading}>
           <ItemsList products={filteredProducts} />
+          <GoToAddProducts navigation={navigation} />
         </WithLoading>
       </View>
     </View>

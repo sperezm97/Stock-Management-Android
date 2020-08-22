@@ -2,10 +2,10 @@ import React from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
   StyleSheet,
   SafeAreaView,
   Dimensions,
+  StatusBar,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Theme } from '../constants';
@@ -14,6 +14,7 @@ import {
   RootBottomTabNavigationProp,
   ProductDetailsScreenNavigationProp,
 } from '../types';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 
 export default function CameraHeader() {
   const navigation = useNavigation<ProductDetailsScreenNavigationProp>();
@@ -29,16 +30,17 @@ export default function CameraHeader() {
           justifyContent: 'space-around',
           paddingHorizontal: 10,
           backgroundColor: 'black',
-          opacity: 0.7,
+          // opacity: 0.7,
           paddingTop: 15,
         }}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <StatusBar barStyle="light-content" />
+        <TouchableHighlight onPress={() => navigation.goBack()}>
           <MaterialIcons
             size={28}
             color={Theme.colors.light.background}
             name="arrow-back"
           />
-        </TouchableOpacity>
+        </TouchableHighlight>
         <Text
           style={{
             fontSize: 22,
