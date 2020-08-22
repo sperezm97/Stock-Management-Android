@@ -6,7 +6,6 @@ import * as React from 'react';
 import { Theme } from '../constants/';
 import useColorScheme from '../hooks/useColorScheme';
 import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/Scanner/ScannerScreen';
 import {
   BottomTabParamList,
   TabOneParamList,
@@ -14,23 +13,15 @@ import {
   ProductsParamList,
   CategoriesParamList,
   AddProductParamList,
-  RootStackParamList,
-  NavigationProps,
-  ProductsScreenNavigationProp,
-  StackProps,
-  ProductsScreenRouteProp,
-  ProductDetailsScreenRouteProp,
-  RootBottomTabNavigationProp,
 } from '../types';
 import ProductDetailsScreen from '../screens/Product/Details';
 import ProductsListScreen from '../screens/Product/ProductsList';
-import CategoriesScreen from '../screens/CategoriesScreen';
+import CategoriesScreen from '../screens/Category';
 import AddProductScreen from '../screens/Product/AddProduct';
 import { View } from '../components/Themed';
 import { Button } from 'react-native';
 import TabBarIcon from '../components/TabBarIcon';
 import AddButton from '../components/AddButton';
-import { useNavigation, useRoute } from '@react-navigation/native';
 import ProductsListNavigator from './ProductsListNavigator';
 import ScannerScreen from '../screens/Scanner/ScannerScreen';
 
@@ -155,6 +146,15 @@ function CategoriesNavigator() {
       <CategoriesStack.Screen
         name="CategoriesScreen"
         component={CategoriesScreen}
+        options={{
+          headerTitle: 'Categorias',
+          headerTitleStyle: {
+            fontSize: Theme.fonts.h2.fontSize,
+            color: Theme.colors.gray,
+            fontFamily: 'segoe-ui-bold',
+          },
+          headerTitleAlign: 'center',
+        }}
       />
     </CategoriesStack.Navigator>
   );

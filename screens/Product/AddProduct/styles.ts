@@ -12,7 +12,9 @@ interface Styles {
 export default StyleSheet.create<Styles>({
   container: {
     flex: 1,
+    width: Dimensions.get('screen').width,
     alignItems: 'center',
+    backgroundColor: Theme.colors.white,
   },
   detailsWrapper: {
     backgroundColor: Theme.colors.white,

@@ -4,8 +4,8 @@ export type Product = {
   name: string;
   description?: string;
   photoUri?: string;
-  alertQuantity: number;
   sellingPrice?: number;
+  alertQuantity?: number;
   quantity: number;
   units: number;
 };

@@ -13,7 +13,12 @@ function ItemsList({ products }: Props) {
       showsVerticalScrollIndicator={false}
       numColumns={2}
       renderItem={({ item }) => (
-        <ItemCard sku={item.sku} name={item.name} uri={item.photoUri} />
+        <ItemCard
+          sku={item.sku}
+          name={item.name}
+          uri={item.photoUri}
+          quantity={item.quantity}
+        />
       )}
       keyExtractor={(item) => item.sku}
     />

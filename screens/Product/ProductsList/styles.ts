@@ -12,11 +12,13 @@ export default StyleSheet.create<Styles>({
     flex: 1,
     width: Dimensions.get('screen').width,
     height: Dimensions.get('screen').height,
+    backgroundColor: Theme.colors.white,
   },
   header: {
     alignItems: 'center',
     backgroundColor: '#FFF',
     flexDirection: 'column',
+    elevation: 1,
   },
   content: {
     alignItems: 'center',

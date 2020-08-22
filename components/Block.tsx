@@ -1,37 +1,43 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { Theme } from '../constants';
-import { TextInput } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface Props {
   title: string;
   description: string | undefined;
   isEditable?: boolean;
+  onPress: (id: number) => void;
+  id: number;
 }
-
-const Block = ({ title, description, isEditable = false }: Props) => {
+interface StyleProps {
+  container: ViewStyle;
+  title: TextStyle;
+  description: TextStyle;
+}
+const Block = (props: Props) => {
+  const { title, onPress, description, isEditable = false, id } = props;
   return (
-    <View>
-      <Text style={styles.title}>{title}</Text>
-      <TextInput
-        multiline={true}
-        editable={isEditable}
-        style={styles.description}>
-        {description}
-      </TextInput>
-      <View style={styles.line} />
-    </View>
+    <TouchableOpacity
+      onPress={() => onPress(id)}
+      style={{ alignItems: 'center' }}>
+      <View style={styles.container}>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.description}>{description}</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 
 export default Block;
 
-const styles = StyleSheet.create({
-  line: {
-    width: 314.67,
+const styles = StyleSheet.create<StyleProps>({
+  container: {
+    paddingVertical: 10,
+    flexDirection: 'column',
+    width: '90%',
     borderBottomWidth: 1,
     borderBottomColor: Theme.colors.primary,
-    marginTop: 2,
   },
   title: {
     fontSize: Theme.fonts.body.fontSize,
@@ -43,7 +49,5 @@ const styles = StyleSheet.create({
   description: {
     fontSize: Theme.fonts.caption.fontSize,
     color: Theme.colors.gray,
-    marginTop: 0,
-    // textAlign: 'left',
   },
 });

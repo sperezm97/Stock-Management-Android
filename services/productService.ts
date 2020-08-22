@@ -1,5 +1,6 @@
 import { Product } from '../state/types/product.type';
 import axios from 'axios';
+import { uploadImage } from './uploadImage';
 
 // const url = "https://localhost:5001/api/products";
 const url = 'https://stockmanagement2017.azurewebsites.net/api/products';
@@ -33,7 +34,25 @@ const getProduct = async (sku: string) => {
   return product.data;
 };
 
-const addProduct = async (product: Product) => {
+const addProduct = async (product: Product, photoUri?: string) => {
+  // const addedProduct: Product =
+  //   typeof photoUri === 'string'
+  //     ? {
+  //         sku: product.sku,
+  //         categoryId: product.categoryId,
+  //         name: product.name,
+  //         description: product.description,
+  //         photoUri: photoUri,
+  //         alertQuantity: product.alertQuantity,
+  //         sellingPrice: product.sellingPrice,
+  //         quantity: product.quantity,
+  //         units: product.units,
+  //       }
+  //     : { ...product };
+  if (typeof photoUri === 'string') {
+    const newPhoto = await uploadImage(photoUri);
+    product.photoUri = newPhoto;
+  }
   try {
     const newProduct = (await axios.post<Product>(url, product, headers)).data;
     return newProduct;

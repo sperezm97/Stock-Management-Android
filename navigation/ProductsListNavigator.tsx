@@ -5,13 +5,8 @@ import ProductsListScreen from '../screens/Product/ProductsList';
 import ProductDetailsScreen from '../screens/Product/Details';
 
 const ProductsListStack = createStackNavigator<ProductsParamList>();
-
-function ProductsListNavigator({ navigation, route }: any) {
-  if (route.state && route.state.index > 0) {
-    navigation.setOptions({ tabBarVisible: false });
-  } else {
-    navigation.setOptions({ tabBarVisible: true });
-  }
+// { navigation, route }: any
+function ProductsListNavigator() {
   return (
     <ProductsListStack.Navigator>
       <ProductsListStack.Screen
@@ -21,14 +16,14 @@ function ProductsListNavigator({ navigation, route }: any) {
           headerShown: false,
         }}
       />
-      <ProductsListStack.Screen
+      {/* <ProductsListStack.Screen
         name="ProductDetailsScreen"
         component={ProductDetailsScreen}
         options={{
           headerShown: false,
         }}
         initialParams={{ sku: '' }}
-      />
+      /> */}
     </ProductsListStack.Navigator>
   );
 }

@@ -12,8 +12,9 @@ interface Props {
   name: string;
   sku: string;
   uri?: string;
+  quantity: number;
 }
-function ItemCard({ name, sku, uri }: Props) {
+function ItemCard({ name, sku, uri, quantity }: Props) {
   const navigation = useNavigation<ProductDetailsScreenNavigationProp>();
   function imageHandler() {
     if (typeof uri === 'string') {
@@ -34,7 +35,10 @@ function ItemCard({ name, sku, uri }: Props) {
         <View style={styles.imageContainer}>{imageHandler()}</View>
         <View style={styles.textContainer}>
           <Text style={styles.name}>{name}</Text>
-          <Text style={styles.caption}>{sku}</Text>
+          <View style={styles.inLine}>
+            <Text style={styles.caption}>{sku}</Text>
+            <Text style={styles.caption}>{quantity}</Text>
+          </View>
         </View>
       </View>
     </TouchableOpacity>
@@ -46,8 +50,7 @@ export default ItemCard;
 const styles = StyleSheet.create({
   container: {
     width: 150,
-
-    minHeight: 180,
+    height: 180,
     borderRadius: 8,
     borderWidth: 0.5,
     borderColor: '#E5E5E5',
@@ -89,5 +92,14 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     marginTop: 5,
     paddingHorizontal: 10,
+    alignSelf: 'flex-start',
+    height: '40%',
+    width: '100%',
+    justifyContent: 'space-between',
+  },
+  inLine: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
   },
 });

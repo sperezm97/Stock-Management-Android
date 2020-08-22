@@ -10,11 +10,8 @@ import WithLoading from '../../../hooks/hoc/WithLoader';
 import ProductCard from './ProductCard';
 import styles from './styles';
 import { images } from '../../../constants';
-import { useNavigation, useRoute, Route } from '@react-navigation/native';
-import {
-  ProductDetailsScreenRouteProp,
-  RootScreenRouteProp,
-} from '../../../types';
+import { useRoute } from '@react-navigation/native';
+import { ProductDetailsScreenRouteProp } from '../../../types';
 
 function ProductDetailsScreen() {
   const [product, setProduct] = useState<Product>({
@@ -23,9 +20,9 @@ function ProductDetailsScreen() {
     name: '',
     description: '',
     photoUri: '',
-    alertQuantity: 0,
-    sellingPrice: 0,
     quantity: 0,
+    sellingPrice: 0,
+    alertQuantity: 0,
     units: 0,
   });
   const [category, setCategory] = useState<Category>({
@@ -61,6 +58,7 @@ function ProductDetailsScreen() {
   const handleEditing = () => {
     const updateEdit = (prev: boolean) => !prev;
     setEditing(updateEdit);
+    console.log(product.photoUri);
   };
 
   function onSubmit(editProduct: Product) {
@@ -77,7 +75,7 @@ function ProductDetailsScreen() {
         <WithLoading isLoading={loading}>
           <View style={styles.container}>
             <ImageBackground source={images.headerShape} style={styles.image} />
-            <View style={{ top: '12%', alignItems: 'center', width: '80%' }}>
+            <View style={{ top: 90, alignItems: 'center', width: '80%' }}>
               <View style={styles.photoContainer}>
                 <PhotoContainer uri={product.photoUri} />
               </View>
